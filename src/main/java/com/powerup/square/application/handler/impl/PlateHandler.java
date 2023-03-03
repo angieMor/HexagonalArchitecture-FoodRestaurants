@@ -39,9 +39,9 @@ public class PlateHandler implements IPlateHandler {
     public void savePlate(PlateRequest plateRequest) {
         Plate plate = iPlateRequestMapper.toPlate(plateRequest);
         plate.setActive(true);
-//        if(!iRestaurantPersistencePort.existByIdOwner(plateRequest.getIdRestaurant())){
-//            throw new NoDataFoundException();
-//        }
+        if(!iRestaurantPersistencePort.existByIdOwner(plateRequest.getIdRestaurant())){
+            throw new NoDataFoundException();
+        }
 
         plate.setRestaurant(iRestaurantPersistencePort.getRestaurantByIdOwner(plateRequest.getIdRestaurant()));
         plate.setCategory(iCategoryPersistencePort.getCategory(plateRequest.getIdCategory()));
@@ -57,13 +57,13 @@ public class PlateHandler implements IPlateHandler {
 
     @Override
     public void updatePlate(PlateUpdatingRequest plateUpdatingRequest) {
-//        if(!iRestaurantPersistencePort.existByIdOwner(plateUpdatingRequest.getIdOwner())) throw new NoDataFoundException();
-//        else{
+        if(!iRestaurantPersistencePort.existByIdOwner(plateUpdatingRequest.getIdOwner())) throw new NoDataFoundException();
+        else{
             Plate plate = iPlateServicePort.getPlate(plateUpdatingRequest.getId());
             if(Strings.isNotBlank(plateUpdatingRequest.getDescription()) || Strings.isNotEmpty(plateUpdatingRequest.getDescription())) plate.setDescription(plateUpdatingRequest.getDescription());
             if(plateUpdatingRequest.getPrice() > 0) plate.setPrice(plateUpdatingRequest.getPrice());
             iPlateServicePort.updatePlate(plate);
-//        }
+        }
 
     }
 }

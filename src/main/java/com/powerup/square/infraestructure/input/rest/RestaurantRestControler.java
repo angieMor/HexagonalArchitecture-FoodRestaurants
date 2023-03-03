@@ -26,7 +26,7 @@ public class RestaurantRestControler {
     @Operation(summary = "Add a new restaurant")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Restaurant already exists", content = @Content)
     })
     @PostMapping("/createRestaurant")
     public ResponseEntity<Void> saveRestaurantEntity(@Validated @RequestBody RestaurantRequest restaurantRequest){
@@ -36,7 +36,7 @@ public class RestaurantRestControler {
     @Operation(summary = "Get restaurant")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Restaurant do not exists", content = @Content)
     })
     @GetMapping("/GET/{id}")
     public RestaurantResponse getAllRestaurantById(@PathVariable Long id){
@@ -44,8 +44,8 @@ public class RestaurantRestControler {
     }
     @Operation(summary = "Get restaurants")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Restaurant already exists", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Restaurant gotten", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Restaurant do not exists", content = @Content)
     })
     @GetMapping
     public ResponseEntity<List<RestaurantEntity>> getAllRestaurant(){
