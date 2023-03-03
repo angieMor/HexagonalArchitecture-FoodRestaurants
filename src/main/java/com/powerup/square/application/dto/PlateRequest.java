@@ -5,20 +5,20 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+
 
 @Getter
 @Setter
 public class PlateRequest {
 
-    @NotBlank
+//    @NotBlank
     private String name;
     private Long idCategory;
-    @NotBlank
+//    @NotBlank
     private String description;
     private Long price;
     private Long idRestaurant;
-    @NotBlank
+//    @NotBlank
     @URL(message = "must be a url")
     private String urlImage;
 
