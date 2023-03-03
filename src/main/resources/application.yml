@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: 8093
 
 spring:
   name: plazoleta-service
   datasource:
     username: postgres
-    url: jdbc:postgresql://localhost:5432/Plazoleta
+    url: jdbc:postgresql://localhost:5432/foodrestaurants
     platform: postgres
-    password: Pragma1999.jeisson2060
+    password: admin
   jpa:
     generate-ddl: 'true'
     database: POSTGRESQL

@@ -14,7 +14,7 @@ public class PlateUseCase implements IPlateServicePort {
     }
     @Override
     public void savePlate(Plate plate) {
-        if(existByName(plate.getName()) ) throw new PlateAlreadyExistsException();
+//        if(existByName(plate.getName()) ) throw new PlateAlreadyExistsException();
         platePersistencePort.savePlate(plate);
     }
     @Override
