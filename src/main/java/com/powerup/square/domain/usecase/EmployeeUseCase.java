@@ -6,6 +6,7 @@ import com.powerup.square.domain.spi.IEmployeePersistencePort;
 
 import java.util.List;
 
+
 public class EmployeeUseCase implements IEmployeeServicePort {
     private final IEmployeePersistencePort employeePersistencePort;
     public EmployeeUseCase(IEmployeePersistencePort employeePersistencePort) {

@@ -5,11 +5,27 @@ public class Employee {
     private Long idUser;
     private String field;
 
-    public Employee(Long idRestaurant, Long idUser, String field) {
+
+    /**/
+
+    private Restaurant restaurant;
+
+    public Employee(Long idRestaurant, Long idUser, String field
+//            , Restaurant restaurant
+    ) {
         this.idRestaurant = idRestaurant;
         this.idUser = idUser;
         this.field = field;
+//        this.restaurant = restaurant;
     }
+
+//    public Restaurant getRestaurant(){
+//        return restaurant;
+//    }
+//
+//    public void setRestaurant(Restaurant restaurant){
+//        this.restaurant = restaurant;
+//    }
 
     public Long getIdRestaurant() {
         return idRestaurant;

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class EmployeeResponse {
     private Long idUser;
-    private Long idOwner;
+    private Long idRestaurant;
     private String field;
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 public class EmployeeRequest {
     private Long idUser;
-    private Long idOwner;
+    private Long idRestaurant;
     private String field;
 
 }

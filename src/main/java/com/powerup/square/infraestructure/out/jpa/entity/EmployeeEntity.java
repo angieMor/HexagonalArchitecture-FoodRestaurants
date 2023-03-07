@@ -16,11 +16,16 @@ import javax.persistence.*;
 public class EmployeeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idUser", nullable = false)
+    @Column(name = "id_user", nullable = false)
     private Long idUser;
+
+    @Column(name= "id_restaurant")
+    private Long idRestaurant;
+
     @ManyToOne
-    @JoinColumn(name = "id_restaurant", nullable = false)
+    @JoinColumn(name = "id_restaurant", nullable = false, insertable = false, updatable = false)
     private RestaurantEntity restaurant;
+
     @Column(name = "field", nullable = false)
     private String field;
 
