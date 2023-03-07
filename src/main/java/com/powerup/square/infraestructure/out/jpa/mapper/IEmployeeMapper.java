@@ -16,7 +16,6 @@ public interface IEmployeeMapper {
 
     @Mappings({
             @Mapping(target="idUser", source="idUser"),
-            @Mapping(target="idRestaurant", source="idRestaurant"),
             @Mapping(target="field", source="field")
     })
 

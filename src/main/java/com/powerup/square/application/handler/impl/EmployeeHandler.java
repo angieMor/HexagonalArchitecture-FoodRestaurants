@@ -6,6 +6,7 @@ import com.powerup.square.application.handler.IEmployeeHandler;
 import com.powerup.square.application.mapper.*;
 import com.powerup.square.domain.api.IEmployeeServicePort;
 import com.powerup.square.domain.model.Employee;
+import com.powerup.square.domain.model.Restaurant;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,11 @@ public class EmployeeHandler implements IEmployeeHandler {
     @Override
     public void saveEmployee(EmployeeRequest employeeRequest) {
         Employee employee = iEmployeeRequestMapper.ToEmployee(employeeRequest);
+        employee.setIdRestaurant(employee.getIdRestaurant());
+        employee.setIdUser(employee.getIdUser());
+
+//        Restaurant restaurant = res
+//        employee.setIdRestaurant();
         iEmployeeServicePort.saveEmployee(employee);
     }
 

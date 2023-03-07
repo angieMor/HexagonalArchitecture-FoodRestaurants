@@ -8,7 +8,7 @@ public class Employee {
 
     /**/
 
-    private Restaurant restaurant;
+//    private Restaurant restaurant;
 
     public Employee(Long idRestaurant, Long idUser, String field
 //            , Restaurant restaurant

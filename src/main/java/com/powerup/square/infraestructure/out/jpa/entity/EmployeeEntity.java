@@ -19,11 +19,8 @@ public class EmployeeEntity {
     @Column(name = "id_user", nullable = false)
     private Long idUser;
 
-    @Column(name= "id_restaurant")
-    private Long idRestaurant;
-
     @ManyToOne
-    @JoinColumn(name = "id_restaurant", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "id_restaurant")
     private RestaurantEntity restaurant;
 
     @Column(name = "field", nullable = false)

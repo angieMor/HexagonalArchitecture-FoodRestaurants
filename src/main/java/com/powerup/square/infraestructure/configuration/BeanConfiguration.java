@@ -41,6 +41,8 @@ public class BeanConfiguration {
     private final IEmployeeRepository employeeRepository;
     private final IEmployeeMapper employeeMapper;
 
+
+
     @Bean
     @Primary
     public IRestaurantPersistencePort restaurantPersistencePort(){
@@ -64,7 +66,7 @@ public class BeanConfiguration {
 
     @Bean
     public IEmployeePersistencePort employeePersistencePort(){
-        return new EmployeeJpaAdapter(employeeRepository, employeeMapper);
+        return new EmployeeJpaAdapter(employeeRepository, employeeMapper, restaurantRepository);
     }
 
     @Bean
