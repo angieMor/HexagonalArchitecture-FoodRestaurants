@@ -10,6 +10,7 @@ public interface IRestaurantPersistencePort {
     List<Restaurant> getAllRestaurant();
     Restaurant getRestaurant(Long id);
     Restaurant getRestaurantByIdOwner(Long idOwner);
+
     boolean existByName(String name);
     boolean existById(Long id);
     boolean existByIdOwner(Long idOwner);

@@ -1,5 +1,6 @@
 package com.powerup.square.application.handler.impl;
 
+import com.powerup.square.application.dto.PlateIsActiveRequest;
 import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.application.dto.PlateResponse;
 import com.powerup.square.application.dto.PlateUpdatingRequest;
@@ -66,4 +67,19 @@ public class PlateHandler implements IPlateHandler {
         }
 
     }
+
+    @Override
+    public void isActivePlate(PlateIsActiveRequest plateIsActiveRequest) {
+        Plate plate = iPlateServicePort.getPlate(plateIsActiveRequest.getId());
+        Boolean isActive = plateIsActiveRequest.getActive();
+
+        if(plateIsActiveRequest.getActive() == isActive) {
+
+            System.out.println("State of plate is already "+isActive);
+
+        }
+        plate.setActive(isActive);
+        iPlateServicePort.updatePlate(plate);
+    }
+
 }

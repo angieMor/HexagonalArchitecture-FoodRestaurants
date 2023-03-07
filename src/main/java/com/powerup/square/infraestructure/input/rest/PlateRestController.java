@@ -1,6 +1,7 @@
 package com.powerup.square.infraestructure.input.rest;
 
 
+import com.powerup.square.application.dto.PlateIsActiveRequest;
 import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.application.dto.PlateResponse;
 import com.powerup.square.application.dto.PlateUpdatingRequest;
@@ -62,6 +63,16 @@ public class PlateRestController {
     @PutMapping("/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateHandler.updatePlate(plateUpdatingRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @Operation(summary = "change plate")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
+    })
+    @PutMapping("/putActivate")
+    public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
+        plateHandler.isActivePlate(plateIsActiveRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
