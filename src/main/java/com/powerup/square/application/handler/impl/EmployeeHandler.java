@@ -28,10 +28,9 @@ public class EmployeeHandler implements IEmployeeHandler {
     public void saveEmployee(EmployeeRequest employeeRequest) {
         Employee employee = iEmployeeRequestMapper.ToEmployee(employeeRequest);
         employee.setIdRestaurant(employee.getIdRestaurant());
+        // Setting the same idUser from the Users table
         employee.setIdUser(employee.getIdUser());
 
-//        Restaurant restaurant = res
-//        employee.setIdRestaurant();
         iEmployeeServicePort.saveEmployee(employee);
     }
 

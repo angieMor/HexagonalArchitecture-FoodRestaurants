@@ -23,9 +23,8 @@ public class EmployeeJpaAdapter implements IEmployeePersistencePort {
     public void saveEmployee(Employee employee) {
         EmployeeEntity employeeEntity = employeeMapper.toEntity(employee);
         employeeEntity.setRestaurant(restaurantRepository.findByIdOwner(employee.getIdRestaurant()));
+        // Setting the same id as it is on the Users table
         employeeEntity.setIdUser(employee.getIdUser());
-
-//        employeeEntity.setRestaurant(restaurantRepository.findById(employee.getIdRestaurant()).get());
 
         employeeRepository.save(employeeEntity);
     }
