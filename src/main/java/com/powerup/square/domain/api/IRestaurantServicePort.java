@@ -1,7 +1,6 @@
 package com.powerup.square.domain.api;
 
 import com.powerup.square.application.dto.RestaurantListRequest;
-import com.powerup.square.application.dto.RestaurantListResponse;
 import com.powerup.square.domain.model.Restaurant;
 import java.util.List;
 

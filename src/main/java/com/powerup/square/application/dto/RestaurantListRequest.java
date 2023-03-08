@@ -4,15 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 public class RestaurantListRequest {
 
+    @NotNull
     private Long amount;
-    private Long page;
 
-    @NotBlank
-    private String sort;
+    @NotNull
+    private Long page;
 
 }
