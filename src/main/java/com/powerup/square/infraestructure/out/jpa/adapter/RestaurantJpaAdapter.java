@@ -1,16 +1,22 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
 import com.powerup.square.domain.model.Restaurant;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.RestaurantEntity;
 import com.powerup.square.infraestructure.out.jpa.mapper.IRestaurantMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
@@ -24,8 +30,12 @@ public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
     }
 
     @Override
-    public List<Restaurant> getAllRestaurant() {
-        return null;
+    public List<Restaurant> getAllRestaurant(RestaurantListRequest restaurantListRequest) {
+        Pageable pageable = PageRequest.of(restaurantListRequest.getPage().intValue(),
+                restaurantListRequest.getAmount().intValue(),
+                        Sort.by(restaurantListRequest.getSort()).descending());
+
+        return restaurantRepository.findAll(pageable).stream().map(restaurantMapper::toRestaurant).collect(Collectors.toList());
     }
 
     @Override

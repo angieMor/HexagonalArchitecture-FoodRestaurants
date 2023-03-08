@@ -1,5 +1,7 @@
 package com.powerup.square.infraestructure.input.rest;
 
+import com.powerup.square.application.dto.RestaurantListRequest;
+import com.powerup.square.application.dto.RestaurantListResponse;
 import com.powerup.square.application.dto.RestaurantRequest;
 import com.powerup.square.application.dto.RestaurantResponse;
 import com.powerup.square.application.handler.IRestaurantHandler;
@@ -33,6 +35,7 @@ public class RestaurantRestControler {
         restaurantHandler.saveRestaurant(restaurantRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
     @Operation(summary = "Get restaurant")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Restaurant created", content = @Content),
@@ -47,9 +50,10 @@ public class RestaurantRestControler {
             @ApiResponse(responseCode = "201", description = "Restaurant gotten", content = @Content),
             @ApiResponse(responseCode = "400", description = "Restaurant do not exists", content = @Content)
     })
-    @GetMapping
-    public ResponseEntity<List<RestaurantEntity>> getAllRestaurant(){
-        return null;
+    @GetMapping("/all")
+    public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
+        return ResponseEntity.status(HttpStatus.OK).body(restaurantHandler.getAllRestaurant(restaurantListRequest));
+
     }
 
 }
