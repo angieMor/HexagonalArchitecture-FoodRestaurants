@@ -1,25 +1,25 @@
 package com.powerup.square.domain.model;
 
 public class Employee {
-    private Long idRestaurant;
+    private Long idOwner;
     private Long idUser;
     private String field;
 
 
-    public Employee(Long idRestaurant, Long idUser, String field) {
-        this.idRestaurant = idRestaurant;
+    public Employee(Long idOwner, Long idUser, String field) {
+        this.idOwner = idOwner;
         this.idUser = idUser;
         this.field = field;
     }
 
 
 
-    public Long getIdRestaurant() {
-        return idRestaurant;
+    public Long getIdOwner() {
+        return idOwner;
     }
 
-    public void setIdRestaurant(Long idRestaurant) {
-        this.idRestaurant = idRestaurant;
+    public void setIdOwner(Long idOwner) {
+        this.idOwner = idOwner;
     }
 
     public Long getIdUser() {
