@@ -11,6 +11,5 @@ public interface IRestaurantHandler {
     void saveRestaurant(RestaurantRequest restaurantRequest);
     RestaurantResponse getRestaurant(Long id);
 
-//    List<RestaurantListResponse> getAllRestaurant(RestaurantListRequest restaurantListRequest);
     List<RestaurantResponse> getAllRestaurant(RestaurantListRequest restaurantListRequest);
 }

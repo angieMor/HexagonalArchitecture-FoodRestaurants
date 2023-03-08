@@ -11,6 +11,5 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IRestaurantResponseMapper {
     RestaurantResponse toRestaurantResponse(Restaurant restaurant);
-//    RestaurantListResponse toRestaurantListResponse(Restaurant restaurant);
 
 }
