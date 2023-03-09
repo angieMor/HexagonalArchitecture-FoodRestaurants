@@ -64,7 +64,6 @@ public class PlateHandler implements IPlateHandler {
             if(plateUpdatingRequest.getPrice() > 0) plate.setPrice(plateUpdatingRequest.getPrice());
             iPlateServicePort.updatePlate(plate);
         }
-
     }
 
     @Override
@@ -86,16 +85,10 @@ public class PlateHandler implements IPlateHandler {
         List<Plate> plates = iPlateServicePort.getPlatesFromRestaurant(plateListRequest);
         List<PlateResponse> newPlateList = new ArrayList<>();
 
-
-        int x = 0;
         for(Plate plate:plates) {
             if(plate.getRestaurant().getId() == plateListRequest.getIdRestaurant()) {
                 newPlateList.add(iPlateResponseMapper.toPlateResponse(plate));
-
-                x++;
-
             }
-            System.out.println(x);
         }
 
         return newPlateList;
