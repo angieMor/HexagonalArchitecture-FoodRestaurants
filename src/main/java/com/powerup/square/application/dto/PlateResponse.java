@@ -14,7 +14,6 @@ public class PlateResponse {
     private Category category;
     private String description;
     private Long price;
-    private Restaurant restaurant;
     private String urlImage;
 
 }

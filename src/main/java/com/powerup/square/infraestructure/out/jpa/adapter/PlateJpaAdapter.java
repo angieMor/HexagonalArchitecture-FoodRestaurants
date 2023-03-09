@@ -29,19 +29,12 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
 
     @Override
     public List<Plate> getPlatesFromRestaurant(PlateListRequest plateListRequest) {
+        // Getting page and amount for paging functionality
         Pageable pageable = PageRequest.of(plateListRequest.getPage().intValue(),
                 plateListRequest.getAmount().intValue(),
                 Sort.by(Sort.Direction.ASC,"category"));
-//
-//        return plateRepository.findAll(pageable).stream().map(plateMapper::toPlate).collect(Collectors.toList());
 
-//        Pageable pageable = PageRequest.of(plateListRequest.getPage().intValue(),
-//                plateListRequest.getAmount().intValue(),
-//                Sort.by(Sort.Direction.ASC,"category"));
-//
-//        return plateRepository.findPlatesByRestaurantId(plateListRequest.getIdRestaurant(), pageable);
-
-        return plateRepository.findAll(pageable).stream().map(plateMapper::toPlate).collect(Collectors.toList());
+        return plateMapper.toPlate(plateRepository.findPlatesByRestaurantId(plateListRequest.getIdRestaurant(), pageable));
     }
 
     @Override

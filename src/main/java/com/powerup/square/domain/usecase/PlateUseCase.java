@@ -20,6 +20,7 @@ public class PlateUseCase implements IPlateServicePort {
     }
     @Override
     public List<Plate> getPlatesFromRestaurant(PlateListRequest plateListRequest) {
+
         return platePersistencePort.getPlatesFromRestaurant(plateListRequest);
     }
     @Override

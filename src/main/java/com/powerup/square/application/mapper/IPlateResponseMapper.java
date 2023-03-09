@@ -19,7 +19,6 @@ public interface IPlateResponseMapper {
             @Mapping(target="category", source="category"),
             @Mapping(target="description", source="description"),
             @Mapping(target="price", source="price"),
-            @Mapping(target="restaurant", source="restaurant"),
             @Mapping(target="urlImage", source="urlImage")
     })
     PlateResponse toPlateResponse(Plate plate);
