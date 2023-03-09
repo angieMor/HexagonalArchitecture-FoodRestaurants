@@ -11,12 +11,12 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderPlatesRequestMapper {
-    @Mappings({
-            @Mapping(target="idClient", source="idClient"),
-            @Mapping(target="idPlates", source="idPlates"),
-            @Mapping(target="amountPlates", source="amountPlates"),
-            @Mapping(target="idRestaurant", source="idRestaurant")
-    })
+//    @Mappings({
+//            @Mapping(target="idClient", source="idClient"),
+//            @Mapping(target="idPlates", source="idPlates"),
+//            @Mapping(target="amountPlates", source="amountPlates"),
+//            @Mapping(target="idRestaurant", source="idRestaurant")
+//    })
 
     OrderPlates toOrderPlates(OrderGeneralRequest orderGeneralRequest);
 
