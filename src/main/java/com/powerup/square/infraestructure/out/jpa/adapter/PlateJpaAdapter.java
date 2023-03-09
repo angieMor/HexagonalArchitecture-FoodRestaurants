@@ -1,14 +1,19 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
+import com.powerup.square.application.dto.PlateListRequest;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.out.jpa.mapper.IPlateMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IPlateRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -23,9 +28,20 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
     }
 
     @Override
-    public List<Plate> getAllPlates() {
-//        return plateRepository.findAll();
-        return null;
+    public List<Plate> getPlatesFromRestaurant(PlateListRequest plateListRequest) {
+        Pageable pageable = PageRequest.of(plateListRequest.getPage().intValue(),
+                plateListRequest.getAmount().intValue(),
+                Sort.by(Sort.Direction.ASC,"category"));
+//
+//        return plateRepository.findAll(pageable).stream().map(plateMapper::toPlate).collect(Collectors.toList());
+
+//        Pageable pageable = PageRequest.of(plateListRequest.getPage().intValue(),
+//                plateListRequest.getAmount().intValue(),
+//                Sort.by(Sort.Direction.ASC,"category"));
+//
+//        return plateRepository.findPlatesByRestaurantId(plateListRequest.getIdRestaurant(), pageable);
+
+        return plateRepository.findAll(pageable).stream().map(plateMapper::toPlate).collect(Collectors.toList());
     }
 
     @Override

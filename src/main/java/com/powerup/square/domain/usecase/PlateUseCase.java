@@ -1,5 +1,6 @@
 package com.powerup.square.domain.usecase;
 
+import com.powerup.square.application.dto.PlateListRequest;
 import com.powerup.square.domain.api.IPlateServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
 import com.powerup.square.domain.exception.PlateAlreadyExistsException;
@@ -18,8 +19,8 @@ public class PlateUseCase implements IPlateServicePort {
         platePersistencePort.savePlate(plate);
     }
     @Override
-    public List<Plate> getAllPlates() {
-        return platePersistencePort.getAllPlates();
+    public List<Plate> getPlatesFromRestaurant(PlateListRequest plateListRequest) {
+        return platePersistencePort.getPlatesFromRestaurant(plateListRequest);
     }
     @Override
     public Plate getPlate(Long id) {
@@ -44,6 +45,7 @@ public class PlateUseCase implements IPlateServicePort {
     public boolean existByName(String name) {
         return platePersistencePort.existByName(name);
     }
+
 
 }
 

@@ -1,9 +1,8 @@
 package com.powerup.square.application.handler;
 
-import com.powerup.square.application.dto.PlateIsActiveRequest;
-import com.powerup.square.application.dto.PlateRequest;
-import com.powerup.square.application.dto.PlateResponse;
-import com.powerup.square.application.dto.PlateUpdatingRequest;
+import com.powerup.square.application.dto.*;
+
+import java.util.List;
 
 public interface IPlateHandler {
 
@@ -13,4 +12,7 @@ public interface IPlateHandler {
     void updatePlate(PlateUpdatingRequest plateUpdatingRequest);
 
     void isActivePlate(PlateIsActiveRequest plateIsActiveRequest);
+
+    List<PlateResponse> getPlatesFromRestaurant(PlateListRequest plateListRequest);
+
 }
