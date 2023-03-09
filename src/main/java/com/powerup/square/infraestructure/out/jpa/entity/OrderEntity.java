@@ -14,7 +14,6 @@ import java.util.Date;
 @Getter
 @Setter
 public class OrderEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;

@@ -2,6 +2,7 @@ package com.powerup.square.infraestructure.out.jpa.adapter;
 
 import com.powerup.square.domain.model.OrderPlates;
 import com.powerup.square.domain.spi.IOrderPlatesPersistencePort;
+import com.powerup.square.infraestructure.out.jpa.entity.OrderPlatesEntity;
 import com.powerup.square.infraestructure.out.jpa.mapper.IOrderPlatesMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderPlatesRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,11 @@ public class OrderPlatesJpaAdapter implements IOrderPlatesPersistencePort {
 
     @Override
     public void saveOrderPlates(OrderPlates orderPlates) {
+        OrderPlatesEntity orderPlatesEntity = orderPlatesMapper.toEntity(orderPlates);
 
+
+
+//        orderPlatesRepository.save(orderPlatesEntity);
     }
 
     @Override

@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "order_plates")
 @NoArgsConstructor
@@ -14,6 +16,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class OrderPlatesEntity {
+    @GeneratedValue(strategy = SEQUENCE)
     @Id
     @Column(name = "id")
     private Long id;
