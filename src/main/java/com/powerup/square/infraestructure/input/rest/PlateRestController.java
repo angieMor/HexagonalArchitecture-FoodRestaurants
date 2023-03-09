@@ -69,7 +69,7 @@ public class PlateRestController {
             @ApiResponse(responseCode = "201", description = "Plate gotten", content = @Content),
             @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
     })
-    @GetMapping("/all")
+    @PostMapping("/allPlates")
     public ResponseEntity<List<PlateResponse>> getPlatesFromRestaurant(@RequestBody PlateListRequest plateListRequest){
         return ResponseEntity.status(HttpStatus.OK).body(plateHandler.getPlatesFromRestaurant(plateListRequest));
 

@@ -41,6 +41,7 @@ public class PlateUseCase implements IPlateServicePort {
         return platePersistencePort.existById(id);
     }
 
+
     @Override
     public boolean existByName(String name) {
         return platePersistencePort.existByName(name);

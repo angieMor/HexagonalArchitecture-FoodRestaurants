@@ -1,7 +1,6 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.PlateRequest;
-import com.powerup.square.application.dto.PlateUpdatingRequest;
+import com.powerup.square.application.dto.*;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.ICategoryServicePort;
@@ -17,13 +16,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 class PlateHandlerTest {
@@ -86,5 +82,26 @@ class PlateHandlerTest {
 
         verify(iPlateServicePort).updatePlate(plate);
 
+    }
+
+    @Test
+    void isActivePlate() {
+
+        PlateIsActiveRequest plateIsActiveRequest = SavePlateHandlerDataTest.obtainPlateIsActiveRequest();
+        Plate plate = SavePlateHandlerDataTest.obtainPlate();
+
+        when(iPlateServicePort.getPlate(anyLong())).thenReturn(plate);
+
+        plateHandler.isActivePlate(plateIsActiveRequest);
+        verify(iPlateServicePort).updatePlate(plate);
+    }
+
+    @Test
+    void getPlatesFromRestaurant(){
+        PlateListRequest plateListRequest = SavePlateHandlerDataTest.obtainPlateListRequest();
+
+        plateHandler.getPlatesFromRestaurant(plateListRequest);
+
+        verify(iPlateResponseMapper).toPlateResponseList(iPlateServicePort.getPlatesFromRestaurant(plateListRequest));
     }
 }

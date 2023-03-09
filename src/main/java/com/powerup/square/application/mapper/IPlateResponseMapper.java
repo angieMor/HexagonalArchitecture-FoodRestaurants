@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
@@ -22,5 +24,7 @@ public interface IPlateResponseMapper {
             @Mapping(target="urlImage", source="urlImage")
     })
     PlateResponse toPlateResponse(Plate plate);
+
+    List<PlateResponse> toPlateResponseList(List<Plate> plate);
 
 }

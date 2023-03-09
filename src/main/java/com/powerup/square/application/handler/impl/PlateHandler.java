@@ -6,6 +6,7 @@ import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IPlateServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
+import com.powerup.square.domain.exception.SameStateException;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.ICategoryPersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
@@ -69,29 +70,18 @@ public class PlateHandler implements IPlateHandler {
     @Override
     public void isActivePlate(PlateIsActiveRequest plateIsActiveRequest) {
         Plate plate = iPlateServicePort.getPlate(plateIsActiveRequest.getId());
-        Boolean isActive = plateIsActiveRequest.getActive();
+        Boolean status = plateIsActiveRequest.getActive();
 
-        if(plateIsActiveRequest.getActive() == isActive) {
-
-            System.out.println("State of plate is already "+isActive);
-
-        }
-        plate.setActive(isActive);
+//        if(status == iPlateServicePort.getActive(status)) {
+//            throw new SameStateException();
+//        }
+        plate.setActive(status);
         iPlateServicePort.updatePlate(plate);
     }
 
     @Override
     public List<PlateResponse> getPlatesFromRestaurant(PlateListRequest plateListRequest) {
-        List<Plate> plates = iPlateServicePort.getPlatesFromRestaurant(plateListRequest);
-        List<PlateResponse> newPlateList = new ArrayList<>();
-
-        for(Plate plate:plates) {
-            if(plate.getRestaurant().getId() == plateListRequest.getIdRestaurant()) {
-                newPlateList.add(iPlateResponseMapper.toPlateResponse(plate));
-            }
-        }
-
-        return newPlateList;
+        return iPlateResponseMapper.toPlateResponseList(iPlateServicePort.getPlatesFromRestaurant(plateListRequest));
     }
 
 }

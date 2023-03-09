@@ -13,4 +13,5 @@ public interface IPlateRepository extends JpaRepository<PlateEntity, Long> {
     boolean existsByName(String name);
 
     List<PlateEntity> findPlatesByRestaurantId(Long restaurantId, Pageable pageable);
+
 }

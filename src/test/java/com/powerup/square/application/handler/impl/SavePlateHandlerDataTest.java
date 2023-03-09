@@ -1,7 +1,6 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.PlateRequest;
-import com.powerup.square.application.dto.PlateUpdatingRequest;
+import com.powerup.square.application.dto.*;
 import com.powerup.square.domain.model.Category;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.model.Restaurant;
@@ -58,6 +57,36 @@ public class SavePlateHandlerDataTest {
 
         return plateUpdatingRequest;
 
+    }
+
+    public static PlateIsActiveRequest obtainPlateIsActiveRequest(){
+        PlateIsActiveRequest plateIsActiveRequest = new PlateIsActiveRequest();
+
+        plateIsActiveRequest.setActive(true);
+        plateIsActiveRequest.setId(1L);
+
+        return plateIsActiveRequest;
+    }
+
+    public static PlateListRequest obtainPlateListRequest(){
+        PlateListRequest plateListRequest = new PlateListRequest();
+
+        plateListRequest.setIdRestaurant(2L);
+        plateListRequest.setPage(0L);
+        plateListRequest.setAmount(2L);
+
+        return plateListRequest;
+    }
+
+    public static PlateResponse obtainPlateResponse(){
+        PlateResponse plateResponse = new PlateResponse();
+
+        plateResponse.setName("Mexican Hamburguer");
+        plateResponse.setDescription("Have nachos, sour cream, guacamole and pico de gallo");
+        plateResponse.setPrice(15L);
+        plateResponse.setUrlImage("www.hamburger.com/asdas.png");
+
+        return plateResponse;
     }
 
 }

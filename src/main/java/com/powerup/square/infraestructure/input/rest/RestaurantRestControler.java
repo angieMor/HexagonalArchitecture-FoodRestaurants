@@ -48,10 +48,9 @@ public class RestaurantRestControler {
             @ApiResponse(responseCode = "201", description = "Restaurant gotten", content = @Content),
             @ApiResponse(responseCode = "400", description = "Restaurant do not exists", content = @Content)
     })
-    @GetMapping("/all")
+    @PostMapping("/allRestaurants")
     public ResponseEntity<List<RestaurantResponse>> getAllRestaurant(@Validated @RequestBody RestaurantListRequest restaurantListRequest){
         return ResponseEntity.status(HttpStatus.OK).body(restaurantHandler.getAllRestaurant(restaurantListRequest));
-
     }
 
 }

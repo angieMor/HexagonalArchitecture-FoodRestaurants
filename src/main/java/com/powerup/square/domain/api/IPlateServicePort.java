@@ -13,6 +13,7 @@ public interface IPlateServicePort {
     void updatePlate(Plate plate);
     void deletePlate(Long id);
     boolean existById(Long id);
+
     boolean existByName(String name);
 
 }

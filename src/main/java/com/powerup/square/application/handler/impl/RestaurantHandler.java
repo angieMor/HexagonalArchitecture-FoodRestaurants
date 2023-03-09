@@ -42,18 +42,7 @@ public class RestaurantHandler implements IRestaurantHandler {
 
     @Override
     public List<RestaurantResponse> getAllRestaurant(RestaurantListRequest restaurantListRequest) {
-
-        List<Restaurant> restaurants = iRestaurantServicePort.getAllRestaurant(restaurantListRequest);
-
-        // Taking the received array to build a new one with the correct response mapper
-        List<RestaurantResponse> newRestaurantList = new ArrayList<>();
-
-        for(int x = 0; x <= restaurants.size()-1; x++){
-//            newRestaurantList.add(iRestaurantResponseMapper.toRestaurantListResponse(restaurants.get(x)));
-            newRestaurantList.add(iRestaurantResponseMapper.toRestaurantResponse(restaurants.get(x)));
-        }
-
-        return newRestaurantList;
+        return iRestaurantResponseMapper.toRestaurantResponse(iRestaurantServicePort.getAllRestaurant(restaurantListRequest));
     }
 
 }
