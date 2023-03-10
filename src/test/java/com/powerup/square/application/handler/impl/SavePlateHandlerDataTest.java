@@ -19,7 +19,7 @@ public class SavePlateHandlerDataTest {
                 "Have nachos, sour cream, guacamole and pico de gallo",
                 15L,
                 new Restaurant(
-                        100L,
+                        1L,
                         "Angus Hamburguers",
                         "Street 25",
                         10L,

@@ -45,10 +45,9 @@ class PlateHandlerTest {
 
         //When
         when(iPlateRequestMapper.toPlate(plateRequest)).thenReturn(plate);
-//        when(!iRestaurantPersistencePort.existByIdOwner(anyLong()))
-//                .thenThrow(new NoDataFoundException())
-//                        .thenReturn(Optional.empty().isPresent());
-        plate.setRestaurant(iRestaurantPersistencePort.getRestaurantByIdOwner(anyLong()));
+//        when(!iRestaurantPersistencePort.existById(anyLong()))
+//                .thenThrow(new NoDataFoundException());
+//        plate.setRestaurant(iRestaurantPersistencePort.getRestaurant(anyLong()));
         plate.setCategory(iCategoryPersistencePort.getCategory(anyLong()));
         plate.setId(anyLong());
 
