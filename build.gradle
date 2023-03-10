@@ -46,6 +46,9 @@ dependencies {
 	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 	implementation "org.springframework.boot:spring-boot-starter-validation:${springBootVersion}"
 
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4' // comsumir micro HTTP
+	implementation 'io.github.openfeign:feign-okhttp:9.2.0' // conexion micro
+
 	runtimeOnly 'org.postgresql:postgresql'
 
 	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"

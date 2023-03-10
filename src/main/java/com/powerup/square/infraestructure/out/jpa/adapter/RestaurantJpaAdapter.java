@@ -1,6 +1,7 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
 import com.powerup.square.application.dto.RestaurantListRequest;
+import com.powerup.square.domain.exception.RestaurantAlreadyExistsException;
 import com.powerup.square.domain.model.Restaurant;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.RestaurantEntity;
@@ -27,7 +28,13 @@ public class RestaurantJpaAdapter implements IRestaurantPersistencePort {
 
     @Override
     public void saveRestaurant(Restaurant restaurant) {
+
+        if(restaurantRepository.findByNit(restaurant.getNit()).isPresent()){
+            throw new RestaurantAlreadyExistsException();
+        }
+
         RestaurantEntity restaurantEntity = restaurantMapper.toEntity(restaurant);
+        restaurantEntity.setId(-1L);
         restaurantRepository.save(restaurantEntity);
     }
 
