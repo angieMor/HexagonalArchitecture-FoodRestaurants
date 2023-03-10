@@ -1,30 +1,30 @@
 package com.powerup.square.domain.model;
 
 public class OrderPlates {
-    private Long idOrder;
-    private Long idPlate;
+    private Order order;
+    private Plate plate;
     private Long amount;
 
-    public OrderPlates(Long idOrder, Long idPlate, Long amount) {
-        this.idOrder = idOrder;
-        this.idPlate = idPlate;
+    public OrderPlates(Order order, Plate plate, Long amount) {
+        this.order = order;
+        this.plate = plate;
         this.amount = amount;
     }
 
-    public Long getIdOrder() {
-        return idOrder;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setIdOrder(Long idOrder) {
-        this.idOrder = idOrder;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public Long getIdPlate() {
-        return idPlate;
+    public Plate getPlate() {
+        return plate;
     }
 
-    public void setIdPlate(Long idPlate) {
-        this.idPlate = idPlate;
+    public void setPlate(Plate plate) {
+        this.plate = plate;
     }
 
     public Long getAmount() {

@@ -7,6 +7,8 @@ import com.powerup.square.domain.api.IOrderPlatesServicePort;
 import com.powerup.square.domain.api.IOrderServicePort;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.model.OrderPlates;
+import com.powerup.square.domain.model.Plate;
+import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +29,15 @@ public class OrderHandler implements IOrderHandler {
 
     private final IRestaurantPersistencePort iRestaurantPersistencePort;
 
+    private final IPlatePersistencePort iPlatePersistencePort;
 
-    public OrderHandler(IOrderServicePort iOrderServicePort, IOrderRequestMapper iOrderRequestMapper, IOrderPlatesServicePort iOrderPlatesServicePort, IRestaurantPersistencePort iRestaurantPersistentPort) {
+
+    public OrderHandler(IOrderServicePort iOrderServicePort, IOrderRequestMapper iOrderRequestMapper, IOrderPlatesServicePort iOrderPlatesServicePort, IRestaurantPersistencePort iRestaurantPersistentPort, IPlatePersistencePort iPlatePersistencePort) {
         this.iOrderServicePort = iOrderServicePort;
         this.iOrderRequestMapper = iOrderRequestMapper;
         this.iOrderPlatesServicePort = iOrderPlatesServicePort;
         this.iRestaurantPersistencePort = iRestaurantPersistentPort;
+        this.iPlatePersistencePort = iPlatePersistencePort;
     }
 
     @Override
@@ -41,12 +46,13 @@ public class OrderHandler implements IOrderHandler {
 
         Date date = new java.util.Date();
 
-        order.setId(1L);
+        order.setId(-1L);
         order.setDate(date);
         order.setState("Pending");
-        order.setRestaurant(iRestaurantPersistencePort.getRestaurant(orderGeneralRequest.getIdRestaurant()).getId());
+        order.setRestaurant(iRestaurantPersistencePort.getRestaurant(orderGeneralRequest.getIdRestaurant()));
 
         iOrderServicePort.saveOrder(order);
+
 
         List<OrderPlates> listOrderPlates = new ArrayList<>();
 
@@ -58,17 +64,16 @@ public class OrderHandler implements IOrderHandler {
 //
 //            listOrderPlates.add(orderPlates);
 //        }
+
         for(int x = 0; x<=orderGeneralRequest.getIdPlates().size()-1; x++){
             OrderPlates orderPlates = new OrderPlates(
-                    order.getId(),
-                    orderGeneralRequest.getIdPlates().get(x),
+                    order,
+                    iPlatePersistencePort.getPlate(orderGeneralRequest.getIdPlates().get(x)),
                     orderGeneralRequest.getAmountPlates().get(x)
             );
-
             listOrderPlates.add(orderPlates);
         }
 
         iOrderPlatesServicePort.saveOrderPlates(listOrderPlates);
-
     }
 }

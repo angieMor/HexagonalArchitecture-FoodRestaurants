@@ -42,10 +42,12 @@ public class BeanConfiguration {
         return new RestaurantUseCase(restaurantPersistencePort());
     }
 
+    @Primary
     @Bean
     public IPlatePersistencePort platePersistencePort(){
         return new PlateJpaAdapter(plateRepository, plateMapper);
     }
+
 
     @Bean
     public IPlateServicePort plateServicePort() {
@@ -62,9 +64,10 @@ public class BeanConfiguration {
         return new EmployeeUseCase(employeePersistencePort());
     }
 
+
     @Bean
     public IOrderPersistencePort orderPersistencePort(){
-        return new OrderJpaAdapter(orderRepository, orderMapper, restaurantRepository);
+        return new OrderJpaAdapter(orderRepository, orderMapper);
     }
 
     @Bean

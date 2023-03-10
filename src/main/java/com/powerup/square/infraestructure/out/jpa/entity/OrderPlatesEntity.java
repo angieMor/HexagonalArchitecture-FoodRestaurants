@@ -17,7 +17,6 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Setter
 public class OrderPlatesEntity {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Long id;

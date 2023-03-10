@@ -17,14 +17,11 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     private final IOrderRepository orderRepository;
     private final IOrderMapper orderMapper;
 
-    private final IRestaurantRepository restaurantRepository;
 
 
     @Override
     public void saveOrder(Order order) {
         OrderEntity orderEntity = orderMapper.toEntity(order);
-        orderEntity.setRestaurant(restaurantRepository.findById(order.getIdRestaurant()).get());
-
         orderMapper.toOrder(orderRepository.save(orderEntity));
     }
 
