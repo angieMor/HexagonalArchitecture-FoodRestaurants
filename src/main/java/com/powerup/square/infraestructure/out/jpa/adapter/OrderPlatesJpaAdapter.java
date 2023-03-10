@@ -8,6 +8,7 @@ import com.powerup.square.infraestructure.out.jpa.repository.IOrderPlatesReposit
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,12 +18,14 @@ public class OrderPlatesJpaAdapter implements IOrderPlatesPersistencePort {
     private final IOrderPlatesMapper orderPlatesMapper;
 
     @Override
-    public void saveOrderPlates(OrderPlates orderPlates) {
-        OrderPlatesEntity orderPlatesEntity = orderPlatesMapper.toEntity(orderPlates);
+    public void saveOrderPlates(List<OrderPlates> orderPlates) {
+        List<OrderPlatesEntity> orderPlatesEntities = new ArrayList<>();
 
+        for(OrderPlates newOrder : orderPlates) {
+            orderPlatesEntities.add(orderPlatesMapper.toEntity(newOrder));
+        }
 
-
-//        orderPlatesRepository.save(orderPlatesEntity);
+        orderPlatesRepository.saveAll(orderPlatesEntities);
     }
 
     @Override

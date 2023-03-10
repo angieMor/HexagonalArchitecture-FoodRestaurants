@@ -2,8 +2,7 @@ package com.powerup.square.application.handler;
 
 import com.powerup.square.application.dto.OrderGeneralRequest;
 
-public interface IOrderPlatesHandler {
+public interface IOrderHandler {
 
-    void saveOrderPlates(OrderGeneralRequest orderGeneralRequest);
-
+    void saveOrder(OrderGeneralRequest orderGeneralRequest);
 }

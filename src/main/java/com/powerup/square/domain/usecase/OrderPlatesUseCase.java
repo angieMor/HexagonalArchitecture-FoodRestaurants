@@ -14,7 +14,7 @@ public class OrderPlatesUseCase implements IOrderPlatesServicePort {
     }
 
     @Override
-    public void saveOrderPlates(OrderPlates orderPlates) {
+    public void saveOrderPlates(List<OrderPlates> orderPlates) {
         orderPlatesPersistencePort.saveOrderPlates(orderPlates);
     }
 

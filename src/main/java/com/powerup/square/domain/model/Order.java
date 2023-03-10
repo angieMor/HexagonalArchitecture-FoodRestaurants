@@ -53,7 +53,7 @@ public class Order {
         return idRestaurant;
     }
 
-    public void setIdRestaurant(Long idRestaurant) {
-        this.idRestaurant = idRestaurant;
+    public void setRestaurant(Long restaurant) {
+        this.idRestaurant = restaurant;
     }
 }

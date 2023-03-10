@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity
 @Table(name = "orders")
 @NoArgsConstructor
@@ -14,6 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class OrderEntity {
+    @GeneratedValue(strategy = SEQUENCE)
     @Id
     @Column(name = "id")
     private Long id;
@@ -23,9 +27,6 @@ public class OrderEntity {
     private Date date;
     @Column(name = "state")
     private String state;
-    @ManyToOne
-    @JoinColumn(name = "id_chef")
-    private EmployeeEntity chef;
     @ManyToOne
     @JoinColumn(name = "id_restaurant", nullable = false)
     private RestaurantEntity restaurant;

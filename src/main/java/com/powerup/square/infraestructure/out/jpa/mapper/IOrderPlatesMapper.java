@@ -5,6 +5,7 @@ import com.powerup.square.infraestructure.out.jpa.entity.OrderPlatesEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring",
@@ -12,5 +13,5 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderPlatesMapper {
     OrderPlatesEntity toEntity(OrderPlates orderPlates);
-    OrderPlates toOrderPlates(Optional<OrderPlatesEntity> orderPlatesEntity);
+
 }

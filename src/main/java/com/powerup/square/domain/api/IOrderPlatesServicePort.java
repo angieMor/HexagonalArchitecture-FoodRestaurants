@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IOrderPlatesServicePort {
 
-    void saveOrderPlates(OrderPlates orderPlates);
+    void saveOrderPlates(List<OrderPlates> orderPlates);
     List<OrderPlates> getAllOrderPlatesByOrderId(Long id);
 }

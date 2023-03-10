@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IOrderPlatesRepository extends JpaRepository<OrderPlatesEntity, Long> {
+
+
+
 }

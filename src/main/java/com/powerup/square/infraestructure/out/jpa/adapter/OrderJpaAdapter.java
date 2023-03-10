@@ -2,8 +2,10 @@ package com.powerup.square.infraestructure.out.jpa.adapter;
 
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
+import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
 import com.powerup.square.infraestructure.out.jpa.mapper.IOrderMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
+import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +17,15 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     private final IOrderRepository orderRepository;
     private final IOrderMapper orderMapper;
 
+    private final IRestaurantRepository restaurantRepository;
+
+
     @Override
     public void saveOrder(Order order) {
+        OrderEntity orderEntity = orderMapper.toEntity(order);
+        orderEntity.setRestaurant(restaurantRepository.findById(order.getIdRestaurant()).get());
 
+        orderMapper.toOrder(orderRepository.save(orderEntity));
     }
 
     @Override
@@ -25,18 +33,5 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
         return null;
     }
 
-    @Override
-    public Order getOrder(Long id) {
-        return null;
-    }
 
-    @Override
-    public void cancelOrder(Long id) {
-
-    }
-
-    @Override
-    public void updateOrder(Order order) {
-
-    }
 }
