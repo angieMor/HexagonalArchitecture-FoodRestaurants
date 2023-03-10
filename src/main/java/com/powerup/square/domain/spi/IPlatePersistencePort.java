@@ -15,6 +15,8 @@ public interface IPlatePersistencePort {
     void deletePlate(Long id);
     boolean existById(Long id);
 
+//    boolean getActive(Boolean active);
+
     boolean existByName(String name);
 
 }

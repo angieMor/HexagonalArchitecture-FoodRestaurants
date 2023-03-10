@@ -26,12 +26,12 @@ public class PlateRestController {
     @Operation(summary = "Add a new plate")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Plate created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Plate already exists", content = @Content)
     })
     @PostMapping("/createPlate")
     public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody  PlateRequest plateRequest){
         plateHandler.savePlate(plateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity("Plate created", HttpStatus.CREATED);
     }
     @Operation(summary = "Get plates by id")
     @ApiResponses(value = {
@@ -46,27 +46,27 @@ public class PlateRestController {
 
     @Operation(summary = "change plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate updated successfully", content = @Content)
     })
     @PutMapping("/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateHandler.updatePlate(plateUpdatingRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return new ResponseEntity("Plate updated succesfully",HttpStatus.OK);
     }
 
     @Operation(summary = "change plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate edited successfully", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate state updated successfully", content = @Content)
     })
     @PutMapping("/putActivate")
     public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
         plateHandler.isActivePlate(plateIsActiveRequest);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return new ResponseEntity("Plate status updated",HttpStatus.OK);
     }
 
     @Operation(summary = "Get plates by restaurant")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate gotten", content = @Content),
+            @ApiResponse(responseCode = "200", description = "Plate gotten", content = @Content),
             @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
     })
     @PostMapping("/allPlates")

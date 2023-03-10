@@ -64,6 +64,13 @@ public class ControllerAdvisor {
                 .body(Collections.singletonMap(MESSAGE, "Restaurant already exists"));
     }
 
+    @ExceptionHandler(RestaurantDoNotExistException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            RestaurantDoNotExistException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(MESSAGE, "Restaurant do not exists"));
+    }
+
     @ExceptionHandler(SameStateException.class)
     public ResponseEntity<Map<String, String>> handleNoDataFoundException(
             SameStateException ignoredNoDataFoundException) {
