@@ -3,6 +3,7 @@ package com.powerup.square.application.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -12,6 +13,11 @@ public class OrderGeneralRequest {
     private Long idClient;
     private List<Long> idPlates;
     private List<Long> amountPlates;
+
+//    private HashMap<String, Long> idPlates;
+//    private HashMap<String, Long> amountPlates;
+
+//    private List<HashMap<String, Long>> plates;
     private Long idRestaurant;
 
 }

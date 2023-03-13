@@ -28,11 +28,15 @@ public class OrderPlatesJpaAdapter implements IOrderPlatesPersistencePort {
         for(int x = 0; x<=orderPlates.size()-1;x++){
             orderPlatesEntities.add(orderPlatesMapper.toEntity(orderPlates.get(x)));
             orderPlatesEntities.get(x).setId(-1L);
+//            Long id = orderPlates.get(x).getOrder().getId();
+//            orderPlatesEntities.get(x).setId(id);
+
         }
 
 
-        System.out.println(orderPlatesEntities);
+        System.out.println("jpa plates annd "+orderPlatesEntities);
         orderPlatesRepository.saveAll(orderPlatesEntities);
+        System.out.println("SIGOOOOO 222222");
     }
 
     @Override
