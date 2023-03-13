@@ -60,7 +60,7 @@ public class ControllerAdvisor {
     @ExceptionHandler(RestaurantAlreadyExistsException.class)
     public ResponseEntity<Map<String, String>> handleNoDataFoundException(
             RestaurantAlreadyExistsException ignoredNoDataFoundException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "Restaurant already exists"));
     }
 
@@ -74,13 +74,7 @@ public class ControllerAdvisor {
     @ExceptionHandler(SameStateException.class)
     public ResponseEntity<Map<String, String>> handleNoDataFoundException(
             SameStateException ignoredNoDataFoundException) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "Plate has already the state asked"));
-    }
-
-    @ExceptionHandler(FeignException.class)
-    public String handleFeignStatusException(FeignException e, HttpServletResponse response) {
-        response.setStatus(e.status());
-        return "feignError";
     }
 }

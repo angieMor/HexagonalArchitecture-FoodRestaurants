@@ -18,7 +18,7 @@ public class PlateRequest {
     private String description;
     private Long price;
     private Long idRestaurant;
-    @NotBlank
+    @NotBlank(message =  "Field required")
     @URL(message = "must be a url")
     private String urlImage;
 

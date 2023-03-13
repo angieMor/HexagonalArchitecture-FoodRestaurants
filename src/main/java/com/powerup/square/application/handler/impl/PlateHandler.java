@@ -41,9 +41,9 @@ public class PlateHandler implements IPlateHandler {
     public void savePlate(PlateRequest plateRequest) {
         Plate plate = iPlateRequestMapper.toPlate(plateRequest);
         plate.setActive(true);
-        if(!iRestaurantPersistencePort.existById(plateRequest.getIdRestaurant())){
-            throw new RestaurantDoNotExistException();
-        }
+//        if(!iRestaurantPersistencePort.existById(plateRequest.getIdRestaurant())){
+//            throw new RestaurantDoNotExistException();
+//        }
 
         plate.setRestaurant(iRestaurantPersistencePort.getRestaurant(plateRequest.getIdRestaurant()));
         plate.setCategory(iCategoryPersistencePort.getCategory(plateRequest.getIdCategory()));
@@ -73,9 +73,10 @@ public class PlateHandler implements IPlateHandler {
         Plate plate = iPlateServicePort.getPlate(plateIsActiveRequest.getId());
         Boolean status = plateIsActiveRequest.getActive();
 
-//        if(status == iPlateServicePort.getActive(status)) {
-//            throw new SameStateException();
-//        }
+        if(status == plate.isActive()) {
+            throw new SameStateException();
+        }
+
         plate.setActive(status);
         iPlateServicePort.updatePlate(plate);
     }

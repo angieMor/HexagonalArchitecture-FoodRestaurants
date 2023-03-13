@@ -41,10 +41,10 @@ public class PlateUseCase implements IPlateServicePort {
         return platePersistencePort.existById(id);
     }
 
-//    @Override
-//    public boolean getActive(Boolean active) {
-//        return platePersistencePort.getActive(active);
-//    }
+    @Override
+    public boolean getActive(Boolean active) {
+        return platePersistencePort.getActive(active);
+    }
 
 
     @Override

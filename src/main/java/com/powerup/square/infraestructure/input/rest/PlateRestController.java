@@ -31,7 +31,7 @@ public class PlateRestController {
     @PostMapping("/createPlate")
     public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody  PlateRequest plateRequest){
         plateHandler.savePlate(plateRequest);
-        return new ResponseEntity("Plate created", HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     @Operation(summary = "Get plates by id")
     @ApiResponses(value = {
@@ -51,7 +51,7 @@ public class PlateRestController {
     @PutMapping("/putPlate")
     public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateHandler.updatePlate(plateUpdatingRequest);
-        return new ResponseEntity("Plate updated succesfully",HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @Operation(summary = "change plate")
@@ -61,7 +61,7 @@ public class PlateRestController {
     @PutMapping("/putActivate")
     public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
         plateHandler.isActivePlate(plateIsActiveRequest);
-        return new ResponseEntity("Plate status updated",HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @Operation(summary = "Get plates by restaurant")

@@ -57,10 +57,10 @@ public class PlateJpaAdapter implements IPlatePersistencePort{
         return plateRepository.existsById(id);
     }
 
-//    @Override
-////    public boolean getActive(Boolean active) {
-////        return plateRepository.findByActive(active);
-////    }
+    @Override
+    public boolean getActive(Boolean active) {
+        return plateRepository.findByActive(active);
+    }
 
     @Override
     public boolean existByName(String name) {
