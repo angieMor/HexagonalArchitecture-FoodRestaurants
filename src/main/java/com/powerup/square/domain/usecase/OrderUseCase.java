@@ -24,5 +24,10 @@ public class OrderUseCase implements IOrderServicePort {
         return orderPersistencePort.getAllOrder();
     }
 
+    @Override
+    public Order getOrderByIdClient(Long idClient) {
+        return orderPersistencePort.getOrderByIdClient(idClient);
+    }
+
 }
 

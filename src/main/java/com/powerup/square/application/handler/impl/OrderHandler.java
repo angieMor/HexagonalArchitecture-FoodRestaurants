@@ -5,6 +5,7 @@ import com.powerup.square.application.handler.IOrderHandler;
 import com.powerup.square.application.mapper.IOrderRequestMapper;
 import com.powerup.square.domain.api.IOrderPlatesServicePort;
 import com.powerup.square.domain.api.IOrderServicePort;
+import com.powerup.square.domain.exception.PendingOrderAlreadyExistsException;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.model.OrderPlates;
 import com.powerup.square.domain.model.Plate;
@@ -44,6 +45,10 @@ public class OrderHandler implements IOrderHandler {
     public void saveOrder(OrderGeneralRequest orderGeneralRequest) {
         Order order = iOrderRequestMapper.toOrder(orderGeneralRequest);
 
+//        if(iOrderServicePort.getOrderByIdClient(order.getIdClient()).getIdClient() == order.getIdClient()) {
+//            throw new PendingOrderAlreadyExistsException();
+//        }
+
         Date date = new java.util.Date();
 
         order.setId(-1L);
@@ -52,6 +57,7 @@ public class OrderHandler implements IOrderHandler {
         order.setRestaurant(iRestaurantPersistencePort.getRestaurant(orderGeneralRequest.getIdRestaurant()));
 
         iOrderServicePort.saveOrder(order);
+        Order newOrder = iOrderServicePort.getOrderByIdClient(order.getIdClient());
 
 
         List<OrderPlates> listOrderPlates = new ArrayList<>();
@@ -67,7 +73,7 @@ public class OrderHandler implements IOrderHandler {
 
         for(int x = 0; x<=orderGeneralRequest.getIdPlates().size()-1; x++){
             OrderPlates orderPlates = new OrderPlates(
-                    order,
+                    newOrder,
                     iPlatePersistencePort.getPlate(orderGeneralRequest.getIdPlates().get(x)),
                     orderGeneralRequest.getAmountPlates().get(x)
             );

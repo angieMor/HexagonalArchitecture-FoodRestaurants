@@ -77,4 +77,11 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "Plate has already the state asked"));
     }
+
+    @ExceptionHandler(PendingOrderAlreadyExistsException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            PendingOrderAlreadyExistsException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "You've already a pending order, please wait until its done to order more :)"));
+    }
 }

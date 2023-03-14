@@ -20,7 +20,7 @@ public class OrderEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "id_orders", updatable = true)
     private Long id;
     @Column(name = "id_client", nullable = false)
     private Long idClient;

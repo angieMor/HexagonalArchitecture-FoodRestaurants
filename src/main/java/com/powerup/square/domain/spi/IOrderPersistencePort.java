@@ -9,4 +9,6 @@ public interface IOrderPersistencePort {
     void saveOrder(Order order);
     List<Order> getAllOrder();
 
+    Order getOrderByIdClient(Long idClient);
+
 }
