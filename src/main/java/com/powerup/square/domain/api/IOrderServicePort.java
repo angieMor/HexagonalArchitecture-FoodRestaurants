@@ -11,5 +11,6 @@ public interface IOrderServicePort {
     List<Order> getAllOrder();
 
     Order getOrderByIdClient(Long idClient);
+    boolean existsByIdClient(Long idClient);
 
 }

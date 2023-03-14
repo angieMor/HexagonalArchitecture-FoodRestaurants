@@ -84,4 +84,11 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "You've already a pending order, please wait until its done to order more :)"));
     }
+
+    @ExceptionHandler(PlateIsNotFromThisRestaurantException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            PlateIsNotFromThisRestaurantException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "A plate may not be from the restaurant you asked"));
+    }
 }

@@ -10,4 +10,6 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Long> {
 
     OrderEntity getOrderByIdClient(Long idClient);
 
+    boolean existsByIdClient(Long idClient);
+
 }

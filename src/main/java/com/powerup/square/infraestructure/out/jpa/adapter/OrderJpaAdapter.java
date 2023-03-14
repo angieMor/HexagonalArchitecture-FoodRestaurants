@@ -37,5 +37,10 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
         return orderMapper.toOrder(orderRepository.getOrderByIdClient(idClient));
     }
 
+    @Override
+    public boolean existsByIdClient(Long idClient) {
+        return orderRepository.existsByIdClient(idClient);
+    }
+
 
 }
