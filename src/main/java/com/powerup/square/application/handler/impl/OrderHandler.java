@@ -52,23 +52,20 @@ public class OrderHandler implements IOrderHandler {
         // Validates if client did an order before
         if(iOrderServicePort.existsByIdClient(order.getIdClient())) {
 
-            // If state is different from done, it wont let do the order
+            // If state is different from done, it won't let do the order
             if(iOrderServicePort.getOrderByIdClient(order.getIdClient()).getState() != "Done") {
                 throw new PendingOrderAlreadyExistsException();
             }
         }
 
-        if(iPlateServicePort.getPlate(orderGeneralRequest.getIdPlates().get(0)).getRestaurant().getId() !=
-                orderGeneralRequest.getIdRestaurant()){
-            throw new PlateIsNotFromThisRestaurantException();
-        } else {
-            for(int x = 1; x<=orderGeneralRequest.getIdPlates().size()-1;x++) {
-                if(iPlateServicePort.getPlate(orderGeneralRequest.getIdPlates().get(x)).getRestaurant().getId() !=
-                        orderGeneralRequest.getIdRestaurant()) {
-                    throw new PlateIsNotFromThisRestaurantException();
-                }
+        // Validates if plateId requested is from the restaurant given
+        for(int x = 0; x<=orderGeneralRequest.getIdPlates().size()-1;x++) {
+            if(iPlateServicePort.getPlate(orderGeneralRequest.getIdPlates().get(x)).getRestaurant().getId() !=
+                    orderGeneralRequest.getIdRestaurant()) {
+                throw new PlateIsNotFromThisRestaurantException();
             }
         }
+
 
         Date date = new java.util.Date();
 
@@ -77,20 +74,12 @@ public class OrderHandler implements IOrderHandler {
         order.setState("Pending");
         order.setRestaurant(iRestaurantServicePort.getRestaurant(orderGeneralRequest.getIdRestaurant()));
 
+        // Saving data in orders table
         iOrderServicePort.saveOrder(order);
         Order newOrder = iOrderServicePort.getOrderByIdClient(order.getIdClient());
 
 
         List<OrderPlates> listOrderPlates = new ArrayList<>();
-
-//        for(Long OrderId : orderGeneralRequest.getIdPlates()){
-//
-//            OrderPlates orderPlates = new OrderPlates(newOrder,
-//            orderGeneralRequest.getIdPlates().get(OrderId.intValue()),
-//            orderGeneralRequest.getAmountPlates().get(OrderId.intValue()));
-//
-//            listOrderPlates.add(orderPlates);
-//        }
 
         for(int x = 0; x<=orderGeneralRequest.getIdPlates().size()-1; x++){
             OrderPlates orderPlates = new OrderPlates(
@@ -101,6 +90,7 @@ public class OrderHandler implements IOrderHandler {
             listOrderPlates.add(orderPlates);
         }
 
+        //Saving data in order_plates table
         iOrderPlatesServicePort.saveOrderPlates(listOrderPlates);
     }
 }
