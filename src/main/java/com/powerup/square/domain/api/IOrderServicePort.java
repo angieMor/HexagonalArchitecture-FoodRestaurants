@@ -9,7 +9,7 @@ import java.util.List;
 public interface IOrderServicePort {
 
     void saveOrder(Order order);
-    List<Order> getAllOrdersByState(OrdersStateRequest state);
+    List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest state);
 
     Order getOrderByIdClient(Long idClient);
     boolean existsByIdClient(Long idClient);

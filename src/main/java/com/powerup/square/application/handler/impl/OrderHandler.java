@@ -99,8 +99,8 @@ public class OrderHandler implements IOrderHandler {
     }
 
     @Override
-    public List<OrderGeneralResponse> getAllOrdersByState(OrdersStateRequest ordersStateRequest) {
-        return iOrderResponseMapper.toOrderResponseList(iOrderServicePort.getAllOrdersByState(ordersStateRequest));
+    public List<OrderGeneralResponse> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
+        return iOrderResponseMapper.toOrderResponseList(iOrderServicePort.getAllOrdersByState(page, size, ordersStateRequest));
     }
 
 }

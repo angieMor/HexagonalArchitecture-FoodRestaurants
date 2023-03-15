@@ -8,7 +8,7 @@ import java.util.List;
 public interface IOrderPersistencePort {
 
     void saveOrder(Order order);
-    List<Order> getAllOrdersByState(OrdersStateRequest ordersStateRequest);
+    List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest);
 
     Order getOrderByIdClient(Long idClient);
 

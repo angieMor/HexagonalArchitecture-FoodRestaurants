@@ -10,5 +10,5 @@ public interface IOrderHandler {
 
     void saveOrder(OrderGeneralRequest orderGeneralRequest);
 
-    List<OrderGeneralResponse> getAllOrdersByState(OrdersStateRequest ordersStateRequest);
+    List<OrderGeneralResponse> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest);
 }

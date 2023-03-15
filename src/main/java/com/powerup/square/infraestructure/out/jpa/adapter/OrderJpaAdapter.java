@@ -8,6 +8,9 @@ import com.powerup.square.infraestructure.out.jpa.mapper.IOrderMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
 import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +32,14 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     }
 
     @Override
-    public List<Order> getAllOrdersByState(OrdersStateRequest ordersStateRequest) {
-        return orderMapper.toOrder(orderRepository.getOrdersByState(ordersStateRequest.getState()));
+    public List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(Sort.Direction.ASC,"id")
+        );
+
+        return orderMapper.toOrder(orderRepository.getOrdersByState(ordersStateRequest.getState(), pageable));
     }
 
 

@@ -21,8 +21,8 @@ public class OrderUseCase implements IOrderServicePort {
     }
 
     @Override
-    public List<Order> getAllOrdersByState(OrdersStateRequest ordersStateRequest) {
-        return orderPersistencePort.getAllOrdersByState(ordersStateRequest);
+    public List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
+        return orderPersistencePort.getAllOrdersByState(page, size, ordersStateRequest);
     }
 
 
