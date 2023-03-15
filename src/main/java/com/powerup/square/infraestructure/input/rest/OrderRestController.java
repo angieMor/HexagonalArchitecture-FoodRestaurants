@@ -2,6 +2,8 @@ package com.powerup.square.infraestructure.input.rest;
 
 
 import com.powerup.square.application.dto.OrderGeneralRequest;
+import com.powerup.square.application.dto.OrderGeneralResponse;
+import com.powerup.square.application.dto.OrdersStateRequest;
 import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.application.handler.impl.OrderHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
@@ -33,6 +37,11 @@ public class OrderRestController {
     public ResponseEntity<Void> saveOrderEntity(@Validated @RequestBody OrderGeneralRequest orderGeneralRequest){
         orderHandler.saveOrder(orderGeneralRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/ordersByState")
+    public ResponseEntity<List<OrderGeneralResponse>> getOrdersByState(@Validated @RequestBody OrdersStateRequest ordersStateRequest){
+        return ResponseEntity.status(HttpStatus.OK).body(orderHandler.getAllOrdersByState(ordersStateRequest));
     }
 
 

@@ -7,6 +7,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper(componentModel = "spring",
@@ -23,4 +24,6 @@ public interface IOrderMapper {
 
     OrderEntity toEntity(Order order);
     Order toOrder(OrderEntity orderEntity);
+
+    List<Order> toOrder(List<OrderEntity> orderEntity);
 }

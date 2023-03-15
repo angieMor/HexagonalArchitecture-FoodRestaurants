@@ -1,5 +1,6 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
+import com.powerup.square.application.dto.OrdersStateRequest;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
@@ -28,9 +29,10 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     }
 
     @Override
-    public List<Order> getAllOrder() {
-        return null;
+    public List<Order> getAllOrdersByState(OrdersStateRequest ordersStateRequest) {
+        return orderMapper.toOrder(orderRepository.getOrdersByState(ordersStateRequest.getState()));
     }
+
 
     @Override
     public Order getOrderByIdClient(Long idClient) {
