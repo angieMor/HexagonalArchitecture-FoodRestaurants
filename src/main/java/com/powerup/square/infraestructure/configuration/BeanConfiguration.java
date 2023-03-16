@@ -1,10 +1,14 @@
 package com.powerup.square.infraestructure.configuration;
 
 
-import com.powerup.square.application.mapper.IEmployeeRequestMapper;
+import com.powerup.square.application.dto.user.UserResponse;
 import com.powerup.square.domain.api.*;
 import com.powerup.square.domain.spi.*;
 import com.powerup.square.domain.usecase.*;
+import com.powerup.square.infraestructure.configuration.security.aut.DetailsUser;
+import com.powerup.square.infraestructure.configuration.security.aut.IUserDetailsMapper;
+
+import com.powerup.square.infraestructure.configuration.userclient.UserClient;
 import com.powerup.square.infraestructure.out.jpa.adapter.*;
 import com.powerup.square.infraestructure.out.jpa.mapper.*;
 import com.powerup.square.infraestructure.out.jpa.repository.*;
@@ -12,6 +16,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Optional;
 
 
 @Configuration
@@ -29,7 +43,9 @@ public class BeanConfiguration {
     private final IOrderPlatesRepository orderPlatesRepository;
     private final IOrderPlatesMapper orderPlatesMapper;
 
+    private final UserClient userClient;
 
+    private final IUserDetailsMapper userDetailsMapper;
 
     @Bean
     @Primary
@@ -85,5 +101,37 @@ public class BeanConfiguration {
         return new OrderPlatesUseCase(orderPlatesPersistencePort());
     }
 
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
 
+    @Bean
+    public UserDetailsService userDetailsService() {
+
+        return username -> optionalDetailsUser(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    private Optional<DetailsUser> optionalDetailsUser(String username) {
+        UserResponse userResponse = userClient.getUserByEmail(username);
+        DetailsUser user = userDetailsMapper.toUser(userResponse);
+        user.setRole(userResponse.getRole().getName());
+        return Optional.of(user);
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(encoder());
+        return authProvider;
+    }
+
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
 }
