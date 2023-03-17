@@ -1,8 +1,8 @@
 package com.powerup.square.infraestructure.input.rest;
 
-import com.powerup.square.application.dto.RestaurantListRequest;
-import com.powerup.square.application.dto.RestaurantRequest;
-import com.powerup.square.application.dto.RestaurantResponse;
+import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantResponse;
 import com.powerup.square.application.handler.IRestaurantHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

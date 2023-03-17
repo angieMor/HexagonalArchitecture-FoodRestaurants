@@ -8,4 +8,6 @@ public interface IOrderPlatesServicePort {
 
     void saveOrderPlates(List<OrderPlates> orderPlates);
     List<OrderPlates> getAllOrderPlatesByOrderId(Long id);
+
+
 }

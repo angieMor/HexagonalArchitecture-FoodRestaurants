@@ -1,6 +1,6 @@
 package com.powerup.square.domain.usecase;
 
-import com.powerup.square.application.dto.RestaurantListRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
 import com.powerup.square.domain.api.IRestaurantServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;

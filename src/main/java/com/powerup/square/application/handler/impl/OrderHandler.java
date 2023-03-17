@@ -1,11 +1,12 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.OrderGeneralRequest;
-import com.powerup.square.application.dto.OrderGeneralResponse;
-import com.powerup.square.application.dto.OrdersStateRequest;
+import com.powerup.square.application.dto.order.OrderGeneralRequest;
+import com.powerup.square.application.dto.order.OrderGeneralResponse;
+import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.application.handler.IOrderHandler;
 import com.powerup.square.application.mapper.IOrderRequestMapper;
 import com.powerup.square.application.mapper.IOrderResponseMapper;
+import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IOrderPlatesServicePort;
 import com.powerup.square.domain.api.IOrderServicePort;
 import com.powerup.square.domain.api.IPlateServicePort;
@@ -38,8 +39,10 @@ public class OrderHandler implements IOrderHandler {
     private final IPlatePersistencePort iPlatePersistencePort;
     private final IPlateServicePort iPlateServicePort;
 
+    private final IPlateResponseMapper iPlateResponseMapper;
 
-    public OrderHandler(IOrderServicePort iOrderServicePort, IOrderRequestMapper iOrderRequestMapper, IOrderResponseMapper iOrderResponseMapper, IOrderPlatesServicePort iOrderPlatesServicePort, IRestaurantServicePort iRestaurantServicePort, IPlatePersistencePort iPlatePersistencePort, IPlateServicePort iPlateServicePort) {
+
+    public OrderHandler(IOrderServicePort iOrderServicePort, IOrderRequestMapper iOrderRequestMapper, IOrderResponseMapper iOrderResponseMapper, IOrderPlatesServicePort iOrderPlatesServicePort, IRestaurantServicePort iRestaurantServicePort, IPlatePersistencePort iPlatePersistencePort, IPlateServicePort iPlateServicePort, IPlateResponseMapper iPlateResponseMapper) {
         this.iOrderServicePort = iOrderServicePort;
         this.iOrderRequestMapper = iOrderRequestMapper;
         this.iOrderResponseMapper = iOrderResponseMapper;
@@ -47,6 +50,7 @@ public class OrderHandler implements IOrderHandler {
         this.iRestaurantServicePort = iRestaurantServicePort;
         this.iPlatePersistencePort = iPlatePersistencePort;
         this.iPlateServicePort = iPlateServicePort;
+        this.iPlateResponseMapper = iPlateResponseMapper;
     }
 
     @Override
@@ -100,7 +104,34 @@ public class OrderHandler implements IOrderHandler {
 
     @Override
     public List<OrderGeneralResponse> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
+//        List<OrderGeneralResponse> orders = iOrderResponseMapper.toOrderResponseList(iOrderServicePort.getAllOrdersByState(page, size, ordersStateRequest));
+
+
         return iOrderResponseMapper.toOrderResponseList(iOrderServicePort.getAllOrdersByState(page, size, ordersStateRequest));
+
+//        List<OrderGeneralResponse> orderResponses = new ArrayList<>();
+//
+//        for (int i = 0; i < orders.size(); i++) {
+//            List<OrderPlates> orderPlates = getOrderPlatesById(orders.get(i).getId());
+//            OrderGeneralResponse orderResponse = new OrderGeneralResponse();
+//            orderResponse.setId(orders.get(i).getId());
+//            orderResponse.setDate(orders.get(i).getDate());
+//            orderResponse.setIdClient(orders.get(i).getIdClient());
+//            orderResponse.setOrderPlatesResponse(new ArrayList<>());
+//            for (int j = 0; j < orderPlates.size(); j++) {
+//                OrderPlatesResponse orderPlateResponse = iPlateResponseMapper.toOrderPlatesResponse(orderPlates.get(j).getPlate());
+//                orderPlateResponse.setAmount(orderPlates.get(j).getAmount());
+//                orderResponse.getOrderPlatesResponse().add(orderPlateResponse);
+//            }
+//            orderResponses.add(orderResponse);
+//        }
+//        return orderResponses;
+
+    }
+
+   @Override
+    public List<OrderPlates> getOrderPlatesById(Long id) {
+        return iOrderPlatesServicePort.getAllOrderPlatesByOrderId(id);
     }
 
 }

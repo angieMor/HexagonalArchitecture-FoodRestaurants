@@ -20,7 +20,8 @@ public class OrderPlatesUseCase implements IOrderPlatesServicePort {
 
     @Override
     public List<OrderPlates> getAllOrderPlatesByOrderId(Long id) {
-        return orderPlatesPersistencePort.getAllOrderPlatesByOrderId(id);
+//        return orderPlatesPersistencePort.getAllOrderPlatesByOrderId(id);
+        return null;
     }
 }
 

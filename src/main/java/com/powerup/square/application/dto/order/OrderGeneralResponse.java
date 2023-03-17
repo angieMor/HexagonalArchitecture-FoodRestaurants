@@ -1,4 +1,4 @@
-package com.powerup.square.application.dto;
+package com.powerup.square.application.dto.order;
 
 import com.powerup.square.domain.model.Order;
 import lombok.Getter;
@@ -16,5 +16,7 @@ public class OrderGeneralResponse {
     private Long idClient;
 
     private String state;
+
+//    private List<OrderPlatesResponse> orderPlatesResponse;
 
 }

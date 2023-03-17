@@ -1,15 +1,15 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.*;
+import com.powerup.square.application.dto.plate.PlateIsActiveRequest;
+import com.powerup.square.application.dto.plate.PlateListRequest;
+import com.powerup.square.application.dto.plate.PlateRequest;
+import com.powerup.square.application.dto.plate.PlateUpdatingRequest;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
-import com.powerup.square.domain.api.ICategoryServicePort;
 import com.powerup.square.domain.api.IPlateServicePort;
-import com.powerup.square.domain.exception.NoDataFoundException;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.ICategoryPersistencePort;
 import com.powerup.square.domain.spi.IRestaurantPersistencePort;
-import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -19,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 class PlateHandlerTest {

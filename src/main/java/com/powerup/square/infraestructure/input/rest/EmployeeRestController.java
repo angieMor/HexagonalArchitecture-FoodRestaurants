@@ -1,9 +1,7 @@
 package com.powerup.square.infraestructure.input.rest;
 
-import com.powerup.square.application.dto.EmployeeRequest;
-import com.powerup.square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.employee.EmployeeRequest;
 import com.powerup.square.application.handler.IEmployeeHandler;
-import com.powerup.square.infraestructure.out.jpa.mapper.IEmployeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

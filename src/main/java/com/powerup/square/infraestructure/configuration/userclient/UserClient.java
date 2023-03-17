@@ -1,7 +1,7 @@
 package com.powerup.square.infraestructure.configuration.userclient;
 
-import com.powerup.square.application.dto.EmployeeRequest;
-import com.powerup.square.application.dto.EmployeeResponse;
+import com.powerup.square.application.dto.employee.EmployeeRequest;
+import com.powerup.square.application.dto.employee.EmployeeResponse;
 import com.powerup.square.application.dto.user.UserRequest;
 import com.powerup.square.application.dto.user.UserResponse;
 import com.powerup.square.application.dto.user.securityDto.AuthenticationRequest;

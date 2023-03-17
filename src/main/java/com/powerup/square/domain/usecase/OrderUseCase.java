@@ -1,7 +1,6 @@
 package com.powerup.square.domain.usecase;
 
-import com.powerup.square.application.dto.OrderGeneralRequest;
-import com.powerup.square.application.dto.OrdersStateRequest;
+import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.domain.api.IOrderServicePort;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;

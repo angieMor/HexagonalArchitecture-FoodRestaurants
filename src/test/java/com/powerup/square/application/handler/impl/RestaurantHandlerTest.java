@@ -1,7 +1,7 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.RestaurantListRequest;
-import com.powerup.square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantRequest;
 import com.powerup.square.application.mapper.IRestaurantRequestMapper;
 import com.powerup.square.application.mapper.IRestaurantResponseMapper;
 import com.powerup.square.domain.api.IRestaurantServicePort;
@@ -15,8 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 class RestaurantHandlerTest {

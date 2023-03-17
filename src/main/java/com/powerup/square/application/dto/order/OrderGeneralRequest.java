@@ -1,4 +1,4 @@
-package com.powerup.square.application.dto;
+package com.powerup.square.application.dto.order;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +18,7 @@ public class OrderGeneralRequest {
 //    private HashMap<String, Long> amountPlates;
 
 //    private List<HashMap<String, Long>> plates;
+    private Long employeeId;
     private Long idRestaurant;
 
 }

@@ -1,6 +1,6 @@
 package com.powerup.square.application.mapper;
 
-import com.powerup.square.application.dto.RestaurantRequest;
+import com.powerup.square.application.dto.restaurant.RestaurantRequest;
 import com.powerup.square.domain.model.Restaurant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

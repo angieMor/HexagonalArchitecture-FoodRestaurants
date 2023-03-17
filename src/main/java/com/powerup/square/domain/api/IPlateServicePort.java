@@ -1,6 +1,6 @@
 package com.powerup.square.domain.api;
 
-import com.powerup.square.application.dto.PlateListRequest;
+import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.domain.model.Plate;
 
 import java.util.List;

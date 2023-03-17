@@ -1,10 +1,9 @@
 package com.powerup.square.infraestructure.input.rest;
 
 
-import com.powerup.square.application.dto.OrderGeneralRequest;
-import com.powerup.square.application.dto.OrderGeneralResponse;
-import com.powerup.square.application.dto.OrdersStateRequest;
-import com.powerup.square.application.dto.PlateRequest;
+import com.powerup.square.application.dto.order.OrderGeneralRequest;
+import com.powerup.square.application.dto.order.OrderGeneralResponse;
+import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.application.handler.impl.OrderHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

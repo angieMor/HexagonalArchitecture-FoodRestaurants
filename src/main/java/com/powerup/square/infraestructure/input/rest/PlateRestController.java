@@ -1,9 +1,8 @@
 package com.powerup.square.infraestructure.input.rest;
 
 
-import com.powerup.square.application.dto.*;
+import com.powerup.square.application.dto.plate.*;
 import com.powerup.square.application.handler.IPlateHandler;
-import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -29,7 +28,7 @@ public class PlateRestController {
             @ApiResponse(responseCode = "400", description = "Plate already exists", content = @Content)
     })
     @PostMapping("/createPlate")
-    public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody  PlateRequest plateRequest){
+    public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody PlateRequest plateRequest){
         plateHandler.savePlate(plateRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

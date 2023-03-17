@@ -1,12 +1,11 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.OrdersStateRequest;
+import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
 import com.powerup.square.infraestructure.out.jpa.mapper.IOrderMapper;
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
-import com.powerup.square.infraestructure.out.jpa.repository.IRestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

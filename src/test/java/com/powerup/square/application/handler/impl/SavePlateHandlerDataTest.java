@@ -1,6 +1,6 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.*;
+import com.powerup.square.application.dto.plate.*;
 import com.powerup.square.domain.model.Category;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.model.Restaurant;

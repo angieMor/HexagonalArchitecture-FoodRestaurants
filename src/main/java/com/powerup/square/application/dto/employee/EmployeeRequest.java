@@ -1,4 +1,4 @@
-package com.powerup.square.application.dto;
+package com.powerup.square.application.dto.employee;
 
 import com.powerup.square.infraestructure.out.jpa.entity.RestaurantEntity;
 import lombok.AllArgsConstructor;

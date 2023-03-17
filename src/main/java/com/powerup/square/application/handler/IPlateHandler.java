@@ -1,6 +1,6 @@
 package com.powerup.square.application.handler;
 
-import com.powerup.square.application.dto.*;
+import com.powerup.square.application.dto.plate.*;
 
 import java.util.List;
 

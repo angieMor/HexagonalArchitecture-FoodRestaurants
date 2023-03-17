@@ -1,7 +1,7 @@
 package com.powerup.square.application.handler;
 
-import com.powerup.square.application.dto.EmployeeRequest;
-import com.powerup.square.application.dto.EmployeeResponse;
+import com.powerup.square.application.dto.employee.EmployeeRequest;
+import com.powerup.square.application.dto.employee.EmployeeResponse;
 
 public interface IEmployeeHandler {
     void saveEmployee(EmployeeRequest employeeRequest);

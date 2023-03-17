@@ -1,12 +1,11 @@
 package com.powerup.square.application.handler.impl;
 
-import com.powerup.square.application.dto.*;
+import com.powerup.square.application.dto.plate.*;
 import com.powerup.square.application.handler.IPlateHandler;
 import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IPlateServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
-import com.powerup.square.domain.exception.RestaurantDoNotExistException;
 import com.powerup.square.domain.exception.SameStateException;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.ICategoryPersistencePort;
@@ -15,7 +14,6 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

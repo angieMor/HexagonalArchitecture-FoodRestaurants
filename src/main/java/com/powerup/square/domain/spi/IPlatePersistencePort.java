@@ -1,8 +1,7 @@
 package com.powerup.square.domain.spi;
 
-import com.powerup.square.application.dto.PlateListRequest;
+import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.domain.model.Plate;
-import com.powerup.square.domain.model.Restaurant;
 
 import java.util.List;
 

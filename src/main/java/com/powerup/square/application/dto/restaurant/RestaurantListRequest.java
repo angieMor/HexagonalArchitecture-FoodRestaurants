@@ -1,4 +1,4 @@
-package com.powerup.square.application.dto;
+package com.powerup.square.application.dto.restaurant;
 
 import lombok.Getter;
 import lombok.Setter;

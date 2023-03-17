@@ -1,4 +1,4 @@
-package com.powerup.square.application.dto;
+package com.powerup.square.application.dto.plate;
 
 import com.powerup.square.domain.model.Category;
 import com.powerup.square.domain.model.Restaurant;

@@ -14,4 +14,6 @@ import java.util.Optional;
 public interface IOrderPlatesMapper {
     OrderPlatesEntity toEntity(OrderPlates orderPlates);
 
+    OrderPlates toOrderPlates(OrderPlatesEntity orderPlatesEntity);
+
 }

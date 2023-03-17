@@ -1,6 +1,5 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.PlateRequest;
 import com.powerup.square.domain.model.Category;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.model.Restaurant;

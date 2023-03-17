@@ -1,6 +1,6 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
-import com.powerup.square.application.dto.PlateListRequest;
+import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.infraestructure.out.jpa.entity.PlateEntity;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
