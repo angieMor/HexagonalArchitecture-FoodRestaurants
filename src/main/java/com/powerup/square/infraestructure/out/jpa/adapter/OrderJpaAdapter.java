@@ -1,10 +1,14 @@
 package com.powerup.square.infraestructure.out.jpa.adapter;
 
 import com.powerup.square.application.dto.order.OrdersStateRequest;
+import com.powerup.square.domain.model.Employee;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.spi.IOrderPersistencePort;
+import com.powerup.square.infraestructure.out.jpa.entity.EmployeeEntity;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
+import com.powerup.square.infraestructure.out.jpa.mapper.IEmployeeMapper;
 import com.powerup.square.infraestructure.out.jpa.mapper.IOrderMapper;
+import com.powerup.square.infraestructure.out.jpa.repository.IEmployeeRepository;
 import com.powerup.square.infraestructure.out.jpa.repository.IOrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -13,12 +17,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class OrderJpaAdapter implements IOrderPersistencePort {
     private final IOrderRepository orderRepository;
     private final IOrderMapper orderMapper;
+
+    private final IEmployeeRepository employeeRepository;
 
 
 
@@ -31,14 +38,18 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     }
 
     @Override
-    public List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
+    public List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest, Long restaurantOfEmployee) {
         Pageable pageable = PageRequest.of(
                 page,
                 size,
-                Sort.by(Sort.Direction.ASC,"id")
+                Sort.by(Sort.Direction.ASC,"id_orders")
         );
 
-        return orderMapper.toOrder(orderRepository.getOrdersByState(ordersStateRequest.getState(), pageable));
+//        Long employeeRestaurantId = employeeRepository.getRestaurantIdByEmployeeId(ordersStateRequest.getIdEmployee()).getRestaurant().getId();
+//        List<Order> findByRestaurantOrder =  orderMapper.toOrder(orderRepository.getOrdersByRestaurantId(employeeRestaurantId));
+        return orderMapper.toOrder(orderRepository.getOrdersByState(ordersStateRequest.getState(), restaurantOfEmployee, pageable));
+//        return orderRepository.getOrdersByState(ordersStateRequest.getState(), pageable).stream().map(orderMapper::toOrder).collect(Collectors.toList());
+
     }
 
 

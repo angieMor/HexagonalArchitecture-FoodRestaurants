@@ -9,4 +9,6 @@ public class OrdersStateRequest {
 
     private String state;
 
+    private Long idEmployee;
+
 }

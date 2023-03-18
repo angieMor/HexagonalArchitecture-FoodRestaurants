@@ -22,7 +22,7 @@ public class EmployeeJpaAdapter implements IEmployeePersistencePort {
     @Override
     public void saveEmployee(Employee employee) {
         EmployeeEntity employeeEntity = employeeMapper.toEntity(employee);
-        employeeEntity.setRestaurant(restaurantRepository.findByIdOwner(employee.getIdOwner()));
+        employeeEntity.setRestaurant(restaurantRepository.findByIdOwner(employee.getIdRestaurant()));
         // Setting the same id as it is on the Users table
         employeeEntity.setIdUser(employee.getIdUser());
 
@@ -36,6 +36,6 @@ public class EmployeeJpaAdapter implements IEmployeePersistencePort {
 
     @Override
     public Employee getEmployee(Long id) {
-        return null;
+        return employeeMapper.toEmployee(employeeRepository.findRestaurantIdByIdUser(id));
     }
 }

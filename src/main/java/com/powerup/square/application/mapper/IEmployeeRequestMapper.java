@@ -12,10 +12,10 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IEmployeeRequestMapper {
 
-    @Mappings({
-            @Mapping(target="idUser", source="idUser"),
-            @Mapping(target="field", source="field")
-    })
+//    @Mappings({
+//            @Mapping(target="idUser", source="idUser"),
+//            @Mapping(target="field", source="field")
+//    })
     Employee ToEmployee(EmployeeRequest employeeRequest);
 
 }

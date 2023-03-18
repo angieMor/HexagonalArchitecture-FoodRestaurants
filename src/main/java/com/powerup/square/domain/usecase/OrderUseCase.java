@@ -20,10 +20,9 @@ public class OrderUseCase implements IOrderServicePort {
     }
 
     @Override
-    public List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
-        return orderPersistencePort.getAllOrdersByState(page, size, ordersStateRequest);
+    public List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest, Long restaurantOfEmployee) {
+        return orderPersistencePort.getAllOrdersByState(page, size, ordersStateRequest, restaurantOfEmployee);
     }
-
 
     @Override
     public Order getOrderByIdClient(Long idClient) {

@@ -18,7 +18,6 @@ public class OrderGeneralRequest {
 //    private HashMap<String, Long> amountPlates;
 
 //    private List<HashMap<String, Long>> plates;
-    private Long employeeId;
     private Long idRestaurant;
 
 }

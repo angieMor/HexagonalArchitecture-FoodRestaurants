@@ -81,9 +81,10 @@ public class BeanConfiguration {
     }
 
 
+
     @Bean
     public IOrderPersistencePort orderPersistencePort(){
-        return new OrderJpaAdapter(orderRepository, orderMapper);
+        return new OrderJpaAdapter(orderRepository, orderMapper, employeeRepository);
     }
 
     @Bean

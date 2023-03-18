@@ -15,12 +15,12 @@ import java.util.Optional;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IOrderMapper {
 
-    @Mappings({
-            @Mapping(target="id", source="id"),
-            @Mapping(target="idClient", source="idClient"),
-            @Mapping(target="date", source="date"),
-            @Mapping(target="state", source="state")
-    })
+//    @Mappings({
+//            @Mapping(target="id", source="id"),
+//            @Mapping(target="idClient", source="idClient"),
+//            @Mapping(target="date", source="date"),
+//            @Mapping(target="state", source="state")
+//    })
 
     OrderEntity toEntity(Order order);
     Order toOrder(OrderEntity orderEntity);

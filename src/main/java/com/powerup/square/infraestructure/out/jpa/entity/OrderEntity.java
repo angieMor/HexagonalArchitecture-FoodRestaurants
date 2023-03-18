@@ -28,6 +28,10 @@ public class OrderEntity {
     private Date date;
     @Column(name = "state")
     private String state;
+
+    @ManyToOne
+    @JoinColumn(name = "id_employee", nullable = false)
+    private EmployeeEntity employee;
     @ManyToOne
     @JoinColumn(name = "id_restaurant", nullable = false)
     private RestaurantEntity restaurant;

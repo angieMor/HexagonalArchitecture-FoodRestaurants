@@ -9,12 +9,15 @@ public class Order {
     private String state;
     private Restaurant restaurant;
 
-    public Order(Long id, Long idClient, Date date, String state, Restaurant restaurant) {
+    private Long idEmployee;
+
+    public Order(Long id, Long idClient, Date date, String state, Restaurant restaurant, Long idEmployee) {
         this.id = id;
         this.idClient = idClient;
         this.date = date;
         this.state = state;
         this.restaurant = restaurant;
+        this.idEmployee = idEmployee;
     }
 
     public Long getId() {
@@ -55,5 +58,13 @@ public class Order {
 
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+    }
+
+    public Long getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(Long idEmployee) {
+        this.idEmployee = idEmployee;
     }
 }
