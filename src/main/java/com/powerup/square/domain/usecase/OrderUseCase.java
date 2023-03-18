@@ -44,6 +44,11 @@ public class OrderUseCase implements IOrderServicePort {
         orderPersistencePort.updateOrderToAsignIt(order);
     }
 
+//    @Override
+//    public void notifyOrderIsReady(Long idClient) {
+//        orderPersistencePort.notifyOrderIsReady(idClient);
+//    }
+
 
 }
 

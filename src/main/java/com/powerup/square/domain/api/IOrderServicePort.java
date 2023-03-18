@@ -1,5 +1,6 @@
 package com.powerup.square.domain.api;
 
+import com.powerup.square.application.dto.order.OrderIsReadyRequest;
 import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.domain.model.Order;
 
@@ -16,4 +17,5 @@ public interface IOrderServicePort {
     Order getOrderById(Long idOrder);
 
     void updateOrderToAsignIt(List<Order> order);
+
 }

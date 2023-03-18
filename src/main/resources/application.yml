@@ -3,11 +3,13 @@ server:
 
 spring:
   name: plazoleta-service
+
   datasource:
     username: postgres
     url: jdbc:postgresql://localhost:5432/foodrestaurants
     platform: postgres
     password: admin
+
   jpa:
     generate-ddl: 'true'
     database: POSTGRESQL
@@ -19,3 +21,9 @@ spring:
     show-sql: 'true'
     hibernate:
       ddl-auto: update
+
+twilio:
+  account:
+    sid: ACf845b8cda302f980a01305014491df59
+  auth:
+    token: adab3c1a8f49b73bb6c8d86e5abc0378
