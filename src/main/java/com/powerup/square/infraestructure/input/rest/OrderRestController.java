@@ -3,6 +3,7 @@ package com.powerup.square.infraestructure.input.rest;
 
 import com.powerup.square.application.dto.order.OrderGeneralRequest;
 import com.powerup.square.application.dto.order.OrderGeneralResponse;
+import com.powerup.square.application.dto.order.OrderUpdateRequest;
 import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.application.handler.impl.OrderHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -44,5 +45,14 @@ public class OrderRestController {
         return ResponseEntity.status(HttpStatus.OK).body(orderHandler.getAllOrdersByState(page, size, ordersStateRequest));
     }
 
-
+    @Operation(summary = "Assign yourself some orders")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = @Content),
+            @ApiResponse(responseCode = "400", description = "", content = @Content)
+    })
+    @PostMapping("/asignOrder")
+    public ResponseEntity<Void> assignOrderEntity(@RequestBody OrderUpdateRequest orderUpdateRequest){
+        orderHandler.updateOrderToAsignIt(orderUpdateRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }

@@ -18,13 +18,11 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Long> {
 
     boolean existsByIdClient(Long idClient);
 
-//    @Query(value = "SELECT * FROM public.orders where state = :state AND id_restaurant = :restaurant", nativeQuery = true)
-//    List<OrderEntity> getOrdersByState(@Param("state") String state, @Param("restaurant") Long restaurantId, Pageable pageable);
-
     @Query(value = "SELECT * FROM public.orders WHERE state = :state AND id_restaurant = :idRestaurant", nativeQuery = true)
     List<OrderEntity> getOrdersByState(@Param("state") String state, @Param("idRestaurant")Long idRestaurant, Pageable pageable);
 
-//    List<OrderEntity> getOrdersByState(String state, Pageable pageable);
-//    List<OrderEntity> getOrdersByRestaurantId(Long idRestaurant);
+    OrderEntity getOrderById(Long idOrder);
+
+
 
 }

@@ -23,7 +23,10 @@ public interface IOrderMapper {
 //    })
 
     OrderEntity toEntity(Order order);
+
     Order toOrder(OrderEntity orderEntity);
 
     List<Order> toOrder(List<OrderEntity> orderEntity);
+
+
 }

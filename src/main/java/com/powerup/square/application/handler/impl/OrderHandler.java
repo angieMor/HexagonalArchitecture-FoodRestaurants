@@ -2,6 +2,7 @@ package com.powerup.square.application.handler.impl;
 
 import com.powerup.square.application.dto.order.OrderGeneralRequest;
 import com.powerup.square.application.dto.order.OrderGeneralResponse;
+import com.powerup.square.application.dto.order.OrderUpdateRequest;
 import com.powerup.square.application.dto.order.OrdersStateRequest;
 import com.powerup.square.application.handler.IOrderHandler;
 import com.powerup.square.application.mapper.IOrderRequestMapper;
@@ -136,5 +137,20 @@ public class OrderHandler implements IOrderHandler {
     public List<OrderPlates> getOrderPlatesById(Long id) {
         return iOrderPlatesServicePort.getAllOrderPlatesByOrderId(id);
     }
+
+    @Override
+    public void updateOrderToAsignIt(OrderUpdateRequest orderUpdateRequest) {
+        List<Order> ordersUpdated = new ArrayList<>();
+        for(Long idOrder: orderUpdateRequest.getIdOrders()) {
+            Order order = iOrderServicePort.getOrderById(idOrder);
+            order.setState("Preparing");
+            order.setIdEmployee(orderUpdateRequest.getIdEmployee());
+
+            ordersUpdated.add(order);
+        }
+
+        iOrderServicePort.updateOrderToAsignIt(ordersUpdated);
+    }
+
 
 }

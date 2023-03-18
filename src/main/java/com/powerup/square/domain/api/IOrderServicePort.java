@@ -11,7 +11,9 @@ public interface IOrderServicePort {
     List<Order> getAllOrdersByState(int page, int size, OrdersStateRequest state, Long restaurantOfTheEmployee);
 
     Order getOrderByIdClient(Long idClient);
-//    List<Order> getOrdersByRestaurantId(Long restaurantId);
     boolean existsByIdClient(Long idClient);
 
+    Order getOrderById(Long idOrder);
+
+    void updateOrderToAsignIt(List<Order> order);
 }

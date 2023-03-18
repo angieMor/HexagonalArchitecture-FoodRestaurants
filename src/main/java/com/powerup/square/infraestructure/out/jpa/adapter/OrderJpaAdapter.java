@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +62,23 @@ public class OrderJpaAdapter implements IOrderPersistencePort {
     @Override
     public boolean existsByIdClient(Long idClient) {
         return orderRepository.existsByIdClient(idClient);
+    }
+
+    @Override
+    public void updateOrderToAsignIt(List<Order> orders) {
+        List<OrderEntity> ordersEntities = new ArrayList<>();
+        EmployeeEntity employee = employeeRepository.findByIdUser(orders.get(0).getIdEmployee());
+        for(Order order: orders){
+            OrderEntity orderEntity = orderMapper.toEntity(order);
+            orderEntity.setEmployee(employee);
+            ordersEntities.add(orderEntity);
+        }
+        orderRepository.saveAll(ordersEntities);
+    }
+
+    @Override
+    public Order getOrderById(Long idOrder) {
+        return orderMapper.toOrder(orderRepository.getOrderById(idOrder));
     }
 
 

@@ -14,4 +14,7 @@ public interface IOrderPersistencePort {
 
     boolean existsByIdClient(Long idClient);
 
+    void updateOrderToAsignIt(List<Order> order);
+    Order getOrderById(Long idOrder);
+
 }
