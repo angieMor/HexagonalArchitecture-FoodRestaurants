@@ -10,9 +10,10 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class RestaurantListRequest {
 
-    @NotNull
+    @NotNull(message = "Field 'amount' can't be null")
     private Long amount;
 
+    @NotNull(message = "Field 'page' can't be null")
     @NotNull
     private Long page;
 

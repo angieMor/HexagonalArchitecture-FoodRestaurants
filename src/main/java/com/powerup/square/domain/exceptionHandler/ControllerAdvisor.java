@@ -91,4 +91,32 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "A plate may not be from the restaurant you asked"));
     }
+
+    @ExceptionHandler(OrderDoNotExistsException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            OrderDoNotExistsException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "Order do not exists for this client, please check the orders list"));
+    }
+
+    @ExceptionHandler(OrderIsNotReadyException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            OrderIsNotReadyException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "An Order that is not ready can't be changed to delivered"));
+    }
+
+    @ExceptionHandler(OrderPinGivenIncorrectException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            OrderPinGivenIncorrectException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "The PIN given is not the correct one, please check again"));
+    }
+
+    @ExceptionHandler(OrderStateDeliveredException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            OrderStateDeliveredException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "The flow of this order was finished and the state shouldn't be changed"));
+    }
 }

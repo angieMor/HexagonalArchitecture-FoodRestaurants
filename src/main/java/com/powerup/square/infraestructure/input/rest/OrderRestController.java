@@ -24,8 +24,8 @@ public class OrderRestController {
 
     @Operation(summary = "Add a new order")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Plate created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate already exists", content = @Content)
+            @ApiResponse(responseCode = "201", description = "Order created", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
     })
     @PostMapping("/createOrder")
     public ResponseEntity<Void> saveOrderEntity(@Validated @RequestBody OrderGeneralRequest orderGeneralRequest){
@@ -33,6 +33,11 @@ public class OrderRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Operation(summary = "Filter orders by state")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Orders filtered by state", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+    })
     @PostMapping("/ordersByState")
     public ResponseEntity<List<OrderGeneralResponse>> getOrdersByState(
             @Validated @RequestBody OrdersStateRequest ordersStateRequest,
@@ -48,21 +53,31 @@ public class OrderRestController {
             @ApiResponse(responseCode = "400", description = "", content = @Content)
     })
     @PostMapping("/asignOrder")
-    public ResponseEntity<Void> assignOrderEntity(@RequestBody OrderUpdateRequest orderUpdateRequest){
+    public ResponseEntity<Void> assignOrderEntity(@Validated @RequestBody OrderUpdateRequest orderUpdateRequest){
         orderHandler.updateOrderToAsignIt(orderUpdateRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @Operation(summary = "Notifies to the client that the order is ready")
+    @Operation(summary = "Notifies to the client that the order is ready via SMS")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "", content = @Content),
             @ApiResponse(responseCode = "400", description = "", content = @Content)
     })
     @PostMapping("/notifyOrderIsReady")
-    public ResponseEntity<Void>  notifyOrderIsReadyEntity(@RequestBody OrderIsReadyRequest orderIsReadyRequest){
+    public ResponseEntity<Void>  notifyOrderIsReadyEntity(@Validated @RequestBody OrderIsReadyRequest orderIsReadyRequest){
         orderHandler.notifyOrderIsReady(orderIsReadyRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @Operation(summary = "Indicate that the order of a client was Delivered")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Client got his order", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+    })
+    @PostMapping("/setOrderToDelivered")
+    public ResponseEntity<Void>  orderWasDeliveredEntity(@Validated @RequestBody OrderDeveliveredRequest orderDeliveredRequest){
+        orderHandler.setOrderToDelivered(orderDeliveredRequest);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
 }

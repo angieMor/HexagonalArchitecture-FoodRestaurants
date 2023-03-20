@@ -13,7 +13,7 @@ public class UsersPin {
     private Long idClient;
     private Long pin;
 
-    public static HashMap<Long, HashMap<String, String>> clientList;
+    public static HashMap<Long, HashMap<String, Object>> clientList;
 
     public Long getIdClient() {
         return idClient;

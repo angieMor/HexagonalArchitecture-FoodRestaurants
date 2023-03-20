@@ -18,5 +18,4 @@ public class OrderGeneralResponse {
     private String state;
 
 //    private List<OrderPlatesResponse> orderPlatesResponse;
-
 }

@@ -48,7 +48,7 @@ public class PlateRestController {
             @ApiResponse(responseCode = "200", description = "Plate updated successfully", content = @Content)
     })
     @PutMapping("/putPlate")
-    public ResponseEntity<Void> editPlate(@RequestBody PlateUpdatingRequest plateUpdatingRequest){
+    public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
         plateHandler.updatePlate(plateUpdatingRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -58,7 +58,7 @@ public class PlateRestController {
             @ApiResponse(responseCode = "200", description = "Plate state updated successfully", content = @Content)
     })
     @PutMapping("/putActivate")
-    public ResponseEntity<Void> editPlateStatus(@RequestBody PlateIsActiveRequest plateIsActiveRequest){
+    public ResponseEntity<Void> editPlateStatus(@Validated @RequestBody PlateIsActiveRequest plateIsActiveRequest){
         plateHandler.isActivePlate(plateIsActiveRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -69,7 +69,7 @@ public class PlateRestController {
             @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
     })
     @PostMapping("/allPlates")
-    public ResponseEntity<List<PlateResponse>> getPlatesFromRestaurant(@RequestBody PlateListRequest plateListRequest){
+    public ResponseEntity<List<PlateResponse>> getPlatesFromRestaurant(@Validated @RequestBody PlateListRequest plateListRequest){
         return ResponseEntity.status(HttpStatus.OK).body(plateHandler.getPlatesFromRestaurant(plateListRequest));
 
     }

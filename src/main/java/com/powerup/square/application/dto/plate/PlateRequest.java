@@ -5,18 +5,22 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Getter
 @Setter
 public class PlateRequest {
 
-    @NotBlank
+    @NotBlank(message = "Field 'name' can't be blank")
     private String name;
+
     private Long idCategory;
-    @NotBlank
+    @NotBlank(message = "Field 'description' can't be blank")
     private String description;
+    @NotNull(message = "Field 'price' can't be null")
     private Long price;
+    @NotNull(message = "Field 'idRestaurant' can't be null")
     private Long idRestaurant;
     @NotBlank(message =  "Field required")
     @URL(message = "must be a url")

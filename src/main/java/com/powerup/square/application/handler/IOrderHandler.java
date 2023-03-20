@@ -18,4 +18,6 @@ public interface IOrderHandler {
     void updateOrderToAsignIt(OrderUpdateRequest orderUpdateRequest);
 
     void notifyOrderIsReady(OrderIsReadyRequest orderIsReadyRequest);
+
+    void setOrderToDelivered(OrderDeveliveredRequest orderDeveliveredRequest);
 }
