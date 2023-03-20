@@ -17,5 +17,4 @@ public interface IOrderServicePort {
     Order getOrderById(Long idOrder);
 
     void updateOrderToAsignIt(List<Order> order);
-
 }

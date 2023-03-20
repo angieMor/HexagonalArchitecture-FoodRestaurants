@@ -171,9 +171,9 @@ public class OrderHandler implements IOrderHandler {
             throw new OrderDoNotExistsException();
         }
 
-        // When order is delivered, client shouldn't be notified again
-        if(iOrderServicePort.getOrderByIdClient(orderIsReadyRequest.getIdClient()).getState()
-                .equals("Delivered"))
+        // Client should be notified only when order is on state Prepared
+        if(!iOrderServicePort.getOrderByIdClient(orderIsReadyRequest.getIdClient()).getState()
+                .equals("Prepared"))
         {
             throw new OrderStateDeliveredException();
         }

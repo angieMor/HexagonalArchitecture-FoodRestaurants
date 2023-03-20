@@ -1,6 +1,7 @@
 package com.powerup.square.infraestructure.out.jpa.repository;
 
 import com.powerup.square.domain.model.Order;
+import com.powerup.square.domain.model.Restaurant;
 import com.powerup.square.infraestructure.out.jpa.entity.OrderEntity;
 import feign.Param;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,5 @@ public interface IOrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> getOrdersByState(@Param("state") String state, @Param("idRestaurant")Long idRestaurant, Pageable pageable);
 
     OrderEntity getOrderById(Long idOrder);
-
-
 
 }

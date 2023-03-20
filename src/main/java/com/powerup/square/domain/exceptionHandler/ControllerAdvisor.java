@@ -133,4 +133,11 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "The order was assigned to another employee, please take another order(s)"));
     }
+
+    @ExceptionHandler(EmployeeNoOrdersAvailableFromItsRestaurantToFilterException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            EmployeeNoOrdersAvailableFromItsRestaurantToFilterException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "Theres no orders available from the restaurant"));
+    }
 }
