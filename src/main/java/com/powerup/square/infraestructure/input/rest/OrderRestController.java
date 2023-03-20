@@ -50,7 +50,7 @@ public class OrderRestController {
     @PostMapping("/asignOrder")
     public ResponseEntity<Void> assignOrderEntity(@RequestBody OrderUpdateRequest orderUpdateRequest){
         orderHandler.updateOrderToAsignIt(orderUpdateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @Operation(summary = "Notifies to the client that the order is ready")
@@ -63,4 +63,6 @@ public class OrderRestController {
         orderHandler.notifyOrderIsReady(orderIsReadyRequest);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+
 }

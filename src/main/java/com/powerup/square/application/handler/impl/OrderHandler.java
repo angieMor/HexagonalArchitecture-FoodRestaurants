@@ -1,6 +1,14 @@
 package com.powerup.square.application.handler.impl;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonWriter;
 import com.powerup.square.application.dto.order.*;
+import com.powerup.square.application.dto.user.UsersPin;
 import com.powerup.square.application.handler.IOrderHandler;
 import com.powerup.square.application.mapper.IOrderRequestMapper;
 import com.powerup.square.application.mapper.IOrderResponseMapper;
@@ -12,11 +20,19 @@ import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.model.OrderPlates;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.configuration.TwilioConfiguration;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.mapstruct.control.MappingControl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import java.lang.Math;
@@ -163,9 +179,32 @@ public class OrderHandler implements IOrderHandler {
         iOrderServicePort.saveOrder(order);
 
         Double randomPin = Math.random() * (10000 - orderIsReadyRequest.getIdClient()+1);
+
         String bodySms = "\n\nHi, your order is finished.\n\nRemember to indicate this PIN number to take your order:\n\n"+Math.round(randomPin);
 
+        //Sending message to client: order is ready
         twilioConfiguration.sendSMS(bodySms);
+
+        //Saving the idClient and the pin into the global variable clientList
+        UsersPin userPinList = new UsersPin();
+
+        userPinList.setIdClient(orderIsReadyRequest.getIdClient());
+        userPinList.setPin(Math.round(randomPin));
+
+
+        JSONObject json = new JSONObject();
+        json.put("idClient", userPinList.getIdClient());
+        json.put("pin", userPinList.getPin());
+
+
+        if(UsersPin.clientList == null) {
+            UsersPin.clientList = new HashMap<>();
+        }
+
+        // Adding the client package into the Json list, converting JsonObject to HashMap
+        UsersPin.clientList.put(userPinList.getIdClient(), new Gson().fromJson(json.toString(), HashMap.class));
+        System.out.println("JSON:\n\n"+UsersPin.clientList);
+
     }
 
 
