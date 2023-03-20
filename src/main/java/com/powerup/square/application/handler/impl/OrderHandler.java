@@ -39,14 +39,12 @@ public class OrderHandler implements IOrderHandler {
     private final IPlatePersistencePort iPlatePersistencePort;
     private final IPlateServicePort iPlateServicePort;
 
-    private final IPlateResponseMapper iPlateResponseMapper;
-
     private final IEmployeeServicePort iEmployeeServicePort;
 
     private final TwilioConfiguration twilioConfiguration;
 
 
-    public OrderHandler(IOrderServicePort iOrderServicePort, IOrderRequestMapper iOrderRequestMapper, IOrderResponseMapper iOrderResponseMapper, IOrderPlatesServicePort iOrderPlatesServicePort, IRestaurantServicePort iRestaurantServicePort, IPlatePersistencePort iPlatePersistencePort, IPlateServicePort iPlateServicePort, IPlateResponseMapper iPlateResponseMapper, IEmployeeServicePort iEmployeeServicePort, TwilioConfiguration twilioConfiguration) {
+    public OrderHandler(IOrderServicePort iOrderServicePort, IOrderRequestMapper iOrderRequestMapper, IOrderResponseMapper iOrderResponseMapper, IOrderPlatesServicePort iOrderPlatesServicePort, IRestaurantServicePort iRestaurantServicePort, IPlatePersistencePort iPlatePersistencePort, IPlateServicePort iPlateServicePort, IEmployeeServicePort iEmployeeServicePort, TwilioConfiguration twilioConfiguration) {
         this.iOrderServicePort = iOrderServicePort;
         this.iOrderRequestMapper = iOrderRequestMapper;
         this.iOrderResponseMapper = iOrderResponseMapper;
@@ -54,7 +52,6 @@ public class OrderHandler implements IOrderHandler {
         this.iRestaurantServicePort = iRestaurantServicePort;
         this.iPlatePersistencePort = iPlatePersistencePort;
         this.iPlateServicePort = iPlateServicePort;
-        this.iPlateResponseMapper = iPlateResponseMapper;
         this.iEmployeeServicePort = iEmployeeServicePort;
         this.twilioConfiguration = twilioConfiguration;
     }
@@ -65,9 +62,15 @@ public class OrderHandler implements IOrderHandler {
 
         // Validates if client did an order before
         if(iOrderServicePort.existsByIdClient(order.getIdClient())) {
-
-            // If state is different from done, it won't let do the order
-            if(iOrderServicePort.getOrderByIdClient(order.getIdClient()).getState() != "Done") {
+            String orderServicePort = iOrderServicePort.getOrderByIdClient(order.getIdClient()).getState();
+            // If state is Ready|Pending|Preparing, it won't let do the order
+            if(orderServicePort
+                    .equals("Ready") ||
+                    orderServicePort
+                            .equals("Pending") ||
+                    orderServicePort
+                            .equals("Preparing"))
+            {
                 throw new PendingOrderAlreadyExistsException();
             }
         }
@@ -105,17 +108,14 @@ public class OrderHandler implements IOrderHandler {
             listOrderPlates.add(orderPlates);
         }
 
-        //Saving data in order_plates table
+        //Saving data of the plates in order_plates table
         iOrderPlatesServicePort.saveOrderPlates(listOrderPlates);
     }
 
     @Override
     public List<OrderGeneralResponse> getAllOrdersByState(int page, int size, OrdersStateRequest ordersStateRequest) {
-//        List<OrderGeneralResponse> orders = iOrderResponseMapper.toOrderResponseList(iOrderServicePort.getAllOrdersByState(page, size, ordersStateRequest));
-        Long restaurantOfTheEmployee = iEmployeeServicePort.getEmployee(ordersStateRequest.getIdEmployee()).getIdRestaurant();
-//
-//        List<OrderGeneralResponse> ordersByRestaurantId = iOrderServicePort.getOrdersByRestaurantId()
 
+        Long restaurantOfTheEmployee = iEmployeeServicePort.getEmployee(ordersStateRequest.getIdEmployee()).getIdRestaurant();
         return iOrderResponseMapper.toOrderResponseList(iOrderServicePort.getAllOrdersByState(page, size, ordersStateRequest, restaurantOfTheEmployee));
 
 //        List<OrderGeneralResponse> orderResponses = new ArrayList<>();
@@ -145,9 +145,16 @@ public class OrderHandler implements IOrderHandler {
 
     @Override
     public void updateOrderToAsignIt(OrderUpdateRequest orderUpdateRequest) {
+
+        //Employee can assign himself more than 1 order
         List<Order> ordersUpdated = new ArrayList<>();
         for(Long idOrder: orderUpdateRequest.getIdOrders()) {
             Order order = iOrderServicePort.getOrderById(idOrder);
+
+            //If an order was already assigned, the process will fail
+            if(order.getState().equals("Preparing")){
+                throw new OrderAssignedAlreadyException();
+            }
             order.setState("Preparing");
             order.setIdEmployee(orderUpdateRequest.getIdEmployee());
 
@@ -251,10 +258,11 @@ public class OrderHandler implements IOrderHandler {
             twilioConfiguration.sendSMS(body);
             throw new OrderIsNotPendingException();
         }
-
+        //Order can be canceled, so it is saved in DB
         order.setState("Canceled");
         iOrderServicePort.saveOrder(order);
 
+        //Sends a notification to user: order canceled successfully
         String body = "Your order was canceled";
         twilioConfiguration.sendSMS(body);
     }

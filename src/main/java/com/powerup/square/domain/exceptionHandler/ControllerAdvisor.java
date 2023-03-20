@@ -126,4 +126,11 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "The order can't be canceled, for more details please check the SMS that will arrive to your phone"));
     }
+
+    @ExceptionHandler(OrderAssignedAlreadyException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            OrderAssignedAlreadyException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "The order was assigned to another employee, please take another order(s)"));
+    }
 }
