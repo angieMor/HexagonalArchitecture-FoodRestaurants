@@ -14,6 +14,7 @@ import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.model.OrderPlates;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.configuration.TwilioConfiguration;
+import com.twilio.Twilio;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -211,7 +212,7 @@ public class OrderHandler implements IOrderHandler {
         }
 
         Order order  = iOrderServicePort.getOrderByIdClient(orderDeveliveredRequest.getIdClient());
-
+        //Only Ready orders are allowed to be in Delivered status
         if(!order.getState()
                 .equals("Ready"))
         {
@@ -219,7 +220,7 @@ public class OrderHandler implements IOrderHandler {
         }
 
         Set<Long> keys = UsersPin.clientList.keySet();
-
+        //Reads the Hashmap content
         for(Iterator<Long> key = keys.iterator(); key.hasNext();){
             Long currentKey = key.next();
             if(currentKey.equals(orderDeveliveredRequest.getIdClient()) &&
@@ -232,5 +233,29 @@ public class OrderHandler implements IOrderHandler {
                     throw new OrderPinGivenIncorrectException();
             }
         }
+    }
+
+    @Override
+    public void setOrderToCanceled(OrderToBeCanceledRequest orderToBeCanceledRequest) {
+        // Order exists
+        if(!iOrderServicePort.existsByIdClient(orderToBeCanceledRequest.getIdClient())){
+            throw new OrderDoNotExistsException();
+        }
+
+        Order order = iOrderServicePort.getOrderByIdClient(orderToBeCanceledRequest.getIdClient());
+        //Only pending orders are allowed to be canceled
+        if(!order.getState()
+                .equals("Pending"))
+        {
+            String body = "We're sorry, your order was already taken by the restaurant and can't be canceled";
+            twilioConfiguration.sendSMS(body);
+            throw new OrderIsNotPendingException();
+        }
+
+        order.setState("Canceled");
+        iOrderServicePort.saveOrder(order);
+
+        String body = "Your order was canceled";
+        twilioConfiguration.sendSMS(body);
     }
 }

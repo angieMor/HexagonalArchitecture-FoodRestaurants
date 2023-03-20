@@ -20,4 +20,6 @@ public interface IOrderHandler {
     void notifyOrderIsReady(OrderIsReadyRequest orderIsReadyRequest);
 
     void setOrderToDelivered(OrderDeveliveredRequest orderDeveliveredRequest);
+
+    void setOrderToCanceled(OrderToBeCanceledRequest orderToBeCanceledRequest);
 }

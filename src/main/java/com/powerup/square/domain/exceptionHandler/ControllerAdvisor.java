@@ -119,4 +119,11 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Collections.singletonMap(MESSAGE, "The flow of this order was finished and the state shouldn't be changed"));
     }
+
+    @ExceptionHandler(OrderIsNotPendingException.class)
+    public ResponseEntity<Map<String, String>> handleNoDataFoundException(
+            OrderIsNotPendingException ignoredNoDataFoundException) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(Collections.singletonMap(MESSAGE, "The order can't be canceled, for more details please check the SMS that will arrive to your phone"));
+    }
 }
