@@ -6,12 +6,15 @@ import com.powerup.square.application.dto.user.UserRequest;
 import com.powerup.square.application.dto.user.UserResponse;
 import com.powerup.square.application.dto.user.securityDto.AuthenticationRequest;
 import com.powerup.square.application.dto.user.securityDto.AuthenticationResponse;
+import com.powerup.square.application.handler.impl.EmployeeHandler;
 import com.powerup.square.infraestructure.configuration.userclient.UserClient;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,12 +22,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Base64;
+
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserRestController {
 
     private final UserClient userClient;
+
+    private final EmployeeHandler employeeHandler;
 
     @Operation(summary = "User authentication")
     @ApiResponses(value = {
@@ -45,8 +52,9 @@ public class UserRestController {
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/proprietary")
-    public ResponseEntity<UserRequest> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userClient.saveUserEntityProprietary(userRequest).getBody());
+    public ResponseEntity<UserRequest> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest,
+                                                                 @RequestHeader(HttpHeaders.AUTHORIZATION)String token){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userClient.saveUserEntityProprietary(userRequest, token).getBody());
     }
 
 
@@ -58,8 +66,30 @@ public class UserRestController {
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/employee")
-    public ResponseEntity<EmployeeResponse> saveUserEntityEmployee(@Validated @RequestBody EmployeeRequest employeeRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userClient.saveUserEntityEmployee(employeeRequest).getBody());
+    public ResponseEntity<UserResponse> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest,
+                                                                   @RequestHeader(HttpHeaders.AUTHORIZATION)String token){
+        UserResponse userResponse = userClient.saveUserEntityEmployee(userRequest, token).getBody();
+
+        // Getting info from token
+        String token1 = token.replace("Bearer ", "");
+
+        // Split into 3 parts with . delimiter
+        String[] parts = token1.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(parts[1]));
+
+        //Accessing to the Json String info
+        JSONObject jsonObject = new JSONObject(payload);
+        String proprietaryEmail = (String) jsonObject.get("sub");
+
+        EmployeeRequest employeeRequest = new EmployeeRequest();
+        employeeRequest.setIdUser(userResponse.getId());
+        employeeRequest.setField("Employee");
+        employeeRequest.setIdRestaurant(userClient.getUserByEmail(proprietaryEmail).getId());
+
+        employeeHandler.saveEmployee(employeeRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Operation(summary = "Add a new Client")

@@ -12,6 +12,7 @@ public class EmployeeRequest {
     @NotNull(message = "Field 'idUser' can't be null")
     private Long idUser;
     @NotNull(message = "Field 'idRestaurant' can't be null")
+    //idOwner
     private Long idRestaurant;
     @NotBlank(message = "Field 'idUser' can't be null")
     private String field;

@@ -8,12 +8,10 @@ import com.powerup.square.application.dto.user.securityDto.AuthenticationRequest
 import com.powerup.square.application.dto.user.securityDto.AuthenticationResponse;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name="user-service",url = "http://localhost:8091/")
 public interface UserClient {
@@ -22,10 +20,12 @@ public interface UserClient {
     ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request);
 
     @RequestMapping(method = RequestMethod.POST, value = "user/proprietary")
-    public ResponseEntity<UserRequest> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest);
+    public ResponseEntity<UserRequest> saveUserEntityProprietary(@Validated @RequestBody UserRequest userRequest,
+                                                                 @RequestHeader(HttpHeaders.AUTHORIZATION)String token);
 
     @RequestMapping(method = RequestMethod.POST, value = "user/employee")
-    public ResponseEntity<EmployeeResponse> saveUserEntityEmployee(@Validated @RequestBody EmployeeRequest employeeRequest);
+    public ResponseEntity<UserResponse> saveUserEntityEmployee(@Validated @RequestBody UserRequest userRequest,
+                                                                   @RequestHeader(HttpHeaders.AUTHORIZATION)String token);
 
     @RequestMapping(method = RequestMethod.POST, value = "user/client")
     public ResponseEntity<UserResponse> saveUserEntityClient(@Validated @RequestBody UserRequest userRequest);

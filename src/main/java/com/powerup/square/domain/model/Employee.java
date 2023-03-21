@@ -18,6 +18,8 @@ public class Employee {
         return restaurant.getId();
     }
 
+    public Long getIdOwnerRestaurant() {return restaurant.getIdOwner();}
+
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }

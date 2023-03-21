@@ -32,7 +32,7 @@ public class EmployeeHandler implements IEmployeeHandler {
         Employee employee = iEmployeeRequestMapper.ToEmployee(employeeRequest);
 
         employee.setIdUser(employee.getIdUser());
-        employee.setRestaurant(iRestaurantServicePort.getRestaurant(employee.getIdRestaurant()));
+        employee.setRestaurant(iRestaurantServicePort.getRestaurantByIdOwner(employeeRequest.getIdRestaurant()));
 
         iEmployeeServicePort.saveEmployee(employee);
     }

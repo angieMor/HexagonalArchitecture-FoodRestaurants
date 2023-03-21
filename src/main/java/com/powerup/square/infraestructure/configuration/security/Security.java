@@ -22,33 +22,33 @@ public class Security {
         http
                 .csrf()
                 .disable()
-//                .authorizeHttpRequests()
-//
-//                // Allows to visualize Swagger without authentication
-//                .antMatchers( "/api/v1/auth/**","/api/user/authenticate**","/swagger-ui/**", "/swagger-resources/**",
-//                        "/v2/api-docs/**", "/v3/api-docs/**")
-//                .permitAll()
-//
-//                // Validating permits to access the endpoints
-//
-//                // User microservice
-//                .antMatchers("/api/user/proprietary").hasAuthority("ROLE_ADMIN")
-//                .antMatchers("/user/employee").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-//                .antMatchers("/user/client**").permitAll()
-//
-//                // Food restaurants microservices
-//                .antMatchers("/square/createRestaurant").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-//                .antMatchers("/square/createPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-//                .antMatchers("/square/putPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-//                .antMatchers("/square/putActivate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
-//                .antMatchers("/square/allRestaurants**").permitAll()
-//                .antMatchers("/square/allPlates**").permitAll()
-//
-//
-//
-//                .anyRequest()
-//                .authenticated()
-//                .and()
+                .authorizeHttpRequests()
+
+                // Allows to visualize Swagger without authentication
+                .antMatchers( "/api/v1/auth/**","/api/user/authenticate**","/swagger-ui/**", "/swagger-resources/**",
+                        "/v2/api-docs/**", "/v3/api-docs/**")
+                .permitAll()
+
+                // Validating permits to access the endpoints
+
+                // User microservice
+                .antMatchers("/api/user/proprietary").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/user/employee").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/user/client**").permitAll()
+
+                // Food restaurants microservices
+                .antMatchers("/square/createRestaurant").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/square/createPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/square/putPlate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/square/putActivate").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
+                .antMatchers("/square/allRestaurants**").permitAll()
+                .antMatchers("/square/allPlates**").permitAll()
+
+
+
+                .anyRequest()
+                .authenticated()
+                .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

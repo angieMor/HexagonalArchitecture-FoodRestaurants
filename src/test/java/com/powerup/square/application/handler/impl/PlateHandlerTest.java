@@ -55,8 +55,6 @@ class PlateHandlerTest {
 
         //Then
         verify(iPlateServicePort).savePlate(plate);
-
-
     }
 
     @Test

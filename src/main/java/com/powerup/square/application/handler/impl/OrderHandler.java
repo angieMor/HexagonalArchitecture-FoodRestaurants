@@ -7,14 +7,13 @@ import com.powerup.square.application.dto.user.UsersPin;
 import com.powerup.square.application.handler.IOrderHandler;
 import com.powerup.square.application.mapper.IOrderRequestMapper;
 import com.powerup.square.application.mapper.IOrderResponseMapper;
-import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.*;
 import com.powerup.square.domain.exception.*;
 import com.powerup.square.domain.model.Order;
 import com.powerup.square.domain.model.OrderPlates;
 import com.powerup.square.domain.spi.IPlatePersistencePort;
 import com.powerup.square.infraestructure.configuration.TwilioConfiguration;
-import com.twilio.Twilio;
+
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -77,8 +76,8 @@ public class OrderHandler implements IOrderHandler {
 
         // Validates if plateId requested is from the restaurant given
         for(int x = 0; x<=orderGeneralRequest.getIdPlates().size()-1;x++) {
-            if(iPlateServicePort.getPlate(orderGeneralRequest.getIdPlates().get(x)).getRestaurant().getId() !=
-                    orderGeneralRequest.getIdRestaurant()) {
+            if(!iPlateServicePort.getPlate(orderGeneralRequest.getIdPlates().get(x)).getRestaurant().getId()
+                    .equals(orderGeneralRequest.getIdRestaurant())) {
                 throw new PlateIsNotFromThisRestaurantException();
             }
         }
@@ -171,9 +170,9 @@ public class OrderHandler implements IOrderHandler {
             throw new OrderDoNotExistsException();
         }
 
-        // Client should be notified only when order is on state Prepared
+        // Client should be notified only when order is on state Preparing
         if(!iOrderServicePort.getOrderByIdClient(orderIsReadyRequest.getIdClient()).getState()
-                .equals("Prepared"))
+                .equals("Preparing"))
         {
             throw new OrderStateDeliveredException();
         }

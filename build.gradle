@@ -13,6 +13,9 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+
+	testImplementation.exclude group: 'com.vaadin.external.google', module: 'android-json'
+
 }
 
 repositories {
@@ -53,7 +56,7 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
 	implementation 'com.google.code.gson:gson:2.10.1'
 	implementation 'org.json:json:20230227'
-	implementation 'com.googlecode.json-simple:json-simple:1.1'
+//	implementation('com.github.openjson:openjson:1.0.12')
 
 	//Twilio
 	implementation 'com.twilio.sdk:twilio:8.35.0'
@@ -62,6 +65,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 
 	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+
 }
 
 tasks.named('test') {
