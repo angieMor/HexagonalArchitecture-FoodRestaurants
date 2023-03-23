@@ -67,8 +67,23 @@ public class PlateRestController {
             @ApiResponse(responseCode = "200", description = "Plate updated successfully", content = @Content)
     })
     @PutMapping("/putPlate")
-    public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest){
-        plateHandler.updatePlate(plateUpdatingRequest);
+    public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest,
+                                          @RequestHeader(HttpHeaders.AUTHORIZATION)String token){
+        // Getting info from token
+        String token1 = token.replace("Bearer ", "");
+
+        // Split into 3 parts with . delimiter
+        String[] parts = token1.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(parts[1]));
+
+        //Accessing to the Json String info
+        JSONObject jsonObject = new JSONObject(payload);
+        String proprietaryEmail = (String) jsonObject.get("sub");
+
+        Long idOwner = userClient.getUserByEmail(proprietaryEmail).getId();
+
+        plateHandler.updatePlate(plateUpdatingRequest, idOwner);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -77,8 +92,23 @@ public class PlateRestController {
             @ApiResponse(responseCode = "200", description = "Plate state updated successfully", content = @Content)
     })
     @PutMapping("/putActivate")
-    public ResponseEntity<Void> editPlateStatus(@Validated @RequestBody PlateIsActiveRequest plateIsActiveRequest){
-        plateHandler.isActivePlate(plateIsActiveRequest);
+    public ResponseEntity<Void> editPlateStatus(@Validated @RequestBody PlateIsActiveRequest plateIsActiveRequest,
+                                                @RequestHeader(HttpHeaders.AUTHORIZATION)String token){
+        // Getting info from token
+        String token1 = token.replace("Bearer ", "");
+
+        // Split into 3 parts with . delimiter
+        String[] parts = token1.split("\\.");
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String payload = new String(decoder.decode(parts[1]));
+
+        //Accessing to the Json String info
+        JSONObject jsonObject = new JSONObject(payload);
+        String proprietaryEmail = (String) jsonObject.get("sub");
+
+        Long idOwner = userClient.getUserByEmail(proprietaryEmail).getId();
+
+        plateHandler.isActivePlate(plateIsActiveRequest, idOwner);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

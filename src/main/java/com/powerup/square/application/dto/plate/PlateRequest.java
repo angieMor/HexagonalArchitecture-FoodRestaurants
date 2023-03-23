@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 
 @Getter
@@ -18,6 +19,7 @@ public class PlateRequest {
     private Long idCategory;
     @NotBlank(message = "Field 'description' can't be blank")
     private String description;
+    @Pattern(regexp = "^(\\d*[1-9]+\\d*\\.?\\d*|\\d*\\.\\d*[1-9]+\\d*)$", message = "The price must be numeric and positive")
     @NotNull(message = "Field 'price' can't be null")
     private Long price;
     @NotBlank(message =  "Field required")

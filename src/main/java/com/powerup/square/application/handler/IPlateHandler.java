@@ -9,9 +9,9 @@ public interface IPlateHandler {
     void savePlate(PlateRequest plateRequest, Long idOwner);
 
     PlateResponse getPlate(Long id);
-    void updatePlate(PlateUpdatingRequest plateUpdatingRequest);
+    void updatePlate(PlateUpdatingRequest plateUpdatingRequest, Long idOwner);
 
-    void isActivePlate(PlateIsActiveRequest plateIsActiveRequest);
+    void isActivePlate(PlateIsActiveRequest plateIsActiveRequest, Long idOwner);
 
     List<PlateResponse> getPlatesFromRestaurant(PlateListRequest plateListRequest);
 

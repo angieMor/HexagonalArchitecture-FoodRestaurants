@@ -41,7 +41,6 @@ public class SavePlateHandlerDataTest {
         plateRequest.setIdCategory(1L);
         plateRequest.setDescription("Have nachos, sour cream, guacamole and pico de gallo");
         plateRequest.setPrice(15L);
-        plateRequest.setIdRestaurant(7L);
         plateRequest.setUrlImage("https://www.hamburger.com/asdas.png");
 
         return plateRequest;
@@ -53,7 +52,6 @@ public class SavePlateHandlerDataTest {
         plateUpdatingRequest.setId(20L);
         plateUpdatingRequest.setDescription("Hamburger with loots of cheese");
         plateUpdatingRequest.setPrice(30L);
-        plateUpdatingRequest.setIdOwner(52L);
 
         return plateUpdatingRequest;
 

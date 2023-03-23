@@ -31,7 +31,7 @@ public class RestaurantRequest {
     private String urlLogo;
 
     @NotNull(message = "Invalid nit: nit is NULL")
-    @Pattern(regexp = "^(\\d*[1-9]+\\d*\\.?\\d*|\\d*\\.\\d*[1-9]+\\d*)$", message = "The NIT must be numeric")
+    @Pattern(regexp = "^(\\d*[1-9]+\\d*\\.?\\d*|\\d*\\.\\d*[1-9]+\\d*)$", message = "The NIT must be numeric and positive")
     @NotBlank (message = "The field NIT is mandatory")
     private String nit;
 }

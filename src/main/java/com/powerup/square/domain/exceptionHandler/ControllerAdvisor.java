@@ -89,7 +89,7 @@ public class ControllerAdvisor {
     public ResponseEntity<Map<String, String>> handleNoDataFoundException(
             PlateIsNotFromThisRestaurantException ignoredNoDataFoundException) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(Collections.singletonMap(MESSAGE, "A plate may not be from the restaurant you asked"));
+                .body(Collections.singletonMap(MESSAGE, "The plate you've asked to update is not from your restaurant"));
     }
 
     @ExceptionHandler(OrderDoNotExistsException.class)

@@ -73,9 +73,10 @@ class PlateHandlerTest {
 
         Plate plate = SavePlateHandlerDataTest.obtainPlate();
         PlateUpdatingRequest plateUpdatingRequest = SavePlateHandlerDataTest.obtainPlateUpdatingRequest();
+        Long idOwner = 4L;
 
         when(iPlateServicePort.getPlate(anyLong())).thenReturn(plate);
-        plateHandler.updatePlate(plateUpdatingRequest);
+        plateHandler.updatePlate(plateUpdatingRequest, idOwner);
 
         verify(iPlateServicePort).updatePlate(plate);
 
@@ -86,10 +87,11 @@ class PlateHandlerTest {
 
         PlateIsActiveRequest plateIsActiveRequest = SavePlateHandlerDataTest.obtainPlateIsActiveRequest();
         Plate plate = SavePlateHandlerDataTest.obtainPlate();
+        Long idOwner = 4L;
 
         when(iPlateServicePort.getPlate(anyLong())).thenReturn(plate);
 
-        plateHandler.isActivePlate(plateIsActiveRequest);
+        plateHandler.isActivePlate(plateIsActiveRequest, idOwner);
         verify(iPlateServicePort).updatePlate(plate);
     }
 
