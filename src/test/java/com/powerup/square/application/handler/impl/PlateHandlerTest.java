@@ -41,6 +41,7 @@ class PlateHandlerTest {
         //Given
         Plate plate = SavePlateHandlerDataTest.obtainPlate();
         PlateRequest plateRequest = SavePlateHandlerDataTest.obtainPlateRequest();
+        Long idOwner = 4L;
 
         //When
         when(iPlateRequestMapper.toPlate(plateRequest)).thenReturn(plate);
@@ -50,7 +51,7 @@ class PlateHandlerTest {
         plate.setCategory(iCategoryPersistencePort.getCategory(anyLong()));
         plate.setId(anyLong());
 
-        plateHandler.savePlate(plateRequest);
+        plateHandler.savePlate(plateRequest, idOwner);
 
 
         //Then

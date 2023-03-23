@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IPlateHandler {
 
-    void savePlate(PlateRequest plateRequest);
+    void savePlate(PlateRequest plateRequest, Long idOwner);
 
     PlateResponse getPlate(Long id);
     void updatePlate(PlateUpdatingRequest plateUpdatingRequest);

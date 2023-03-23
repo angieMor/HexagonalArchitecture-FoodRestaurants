@@ -20,8 +20,6 @@ public class PlateRequest {
     private String description;
     @NotNull(message = "Field 'price' can't be null")
     private Long price;
-    @NotNull(message = "Field 'idRestaurant' can't be null")
-    private Long idRestaurant;
     @NotBlank(message =  "Field required")
     @URL(message = "must be a url")
     private String urlImage;

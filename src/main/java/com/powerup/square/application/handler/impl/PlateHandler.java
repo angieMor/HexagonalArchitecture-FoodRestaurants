@@ -6,6 +6,7 @@ import com.powerup.square.application.mapper.IPlateRequestMapper;
 import com.powerup.square.application.mapper.IPlateResponseMapper;
 import com.powerup.square.domain.api.IPlateServicePort;
 import com.powerup.square.domain.exception.NoDataFoundException;
+import com.powerup.square.domain.exception.RestaurantDoNotExistException;
 import com.powerup.square.domain.exception.SameStateException;
 import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.spi.ICategoryPersistencePort;
@@ -36,14 +37,11 @@ public class PlateHandler implements IPlateHandler {
 
 
     @Override
-    public void savePlate(PlateRequest plateRequest) {
+    public void savePlate(PlateRequest plateRequest, Long idOwner) {
         Plate plate = iPlateRequestMapper.toPlate(plateRequest);
         plate.setActive(true);
-//        if(!iRestaurantPersistencePort.existById(plateRequest.getIdRestaurant())){
-//            throw new RestaurantDoNotExistException();
-//        }
 
-        plate.setRestaurant(iRestaurantPersistencePort.getRestaurant(plateRequest.getIdRestaurant()));
+        plate.setRestaurant(iRestaurantPersistencePort.getRestaurantByIdOwner(idOwner));
         plate.setCategory(iCategoryPersistencePort.getCategory(plateRequest.getIdCategory()));
         plate.setId(-1L);
         iPlateServicePort.savePlate(plate);

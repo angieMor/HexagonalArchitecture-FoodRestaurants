@@ -7,11 +7,9 @@ import com.powerup.square.application.dto.plate.PlateListRequest;
 import com.powerup.square.application.dto.plate.PlateRequest;
 import com.powerup.square.application.dto.plate.PlateUpdatingRequest;
 import com.powerup.square.application.dto.restaurant.RestaurantListRequest;
-import com.powerup.square.application.dto.user.UserRequest;
 import com.powerup.square.application.handler.impl.SaveOrderHandlerDataTest;
 import com.powerup.square.application.handler.impl.SavePlateHandlerDataTest;
 import com.powerup.square.application.handler.impl.SaveRestaurantHandlerDataTest;
-import com.powerup.square.domain.model.Plate;
 import com.powerup.square.domain.model.Restaurant;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +18,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 
@@ -129,6 +126,7 @@ class SecurityTest {
                 .andExpect(status().isOk());
     }
 
+    //                  Order tests
     @Test
     @WithMockUser(username = "Client")
     void clientCreateOrder() throws Exception{
