@@ -37,12 +37,22 @@ public class Security {
                 .antMatchers("/api/user/client**").permitAll()
 
                 // Food restaurants microservices
+
+                //Restaurant Security
                 .antMatchers("/restaurants/createRestaurant").hasAnyAuthority("ROLE_ADMIN","ROLE_PROPRIETARY")
                 .antMatchers("/restaurants/allRestaurants**").permitAll()
+                //Plates security
                 .antMatchers("/plates/createPlate").hasAnyAuthority("ROLE_PROPRIETARY")
                 .antMatchers("/plates/putPlate").hasAnyAuthority("ROLE_PROPRIETARY")
                 .antMatchers("/plates/putActivate").hasAnyAuthority("ROLE_PROPRIETARY")
                 .antMatchers("/plates/allPlates").permitAll()
+                //Orders security
+                .antMatchers("/orders/createOrder").permitAll()
+                .antMatchers("/orders/ordersByState").hasAuthority("ROLE_EMPLOYEE")
+                .antMatchers("/orders/asignOrder").hasAuthority("ROLE_EMPLOYEE")
+                .antMatchers("/orders/notifyOrderIsReady").hasAuthority("ROLE_EMPLOYEE")
+                .antMatchers("/orders/setOrderToDelivered").hasAuthority("ROLE_EMPLOYEE")
+                .antMatchers("/orders/cancelOrder").permitAll()
 
                 .anyRequest()
                 .authenticated()

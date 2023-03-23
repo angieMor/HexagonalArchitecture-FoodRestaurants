@@ -30,8 +30,10 @@ public class RestaurantRestControler {
     })
     @PostMapping("/createRestaurant")
     public ResponseEntity<Void> saveRestaurantEntity(@Validated @RequestBody RestaurantRequest restaurantRequest){
+//        public ResponseEntity saveRestaurantEntity(@Validated @RequestBody RestaurantRequest restaurantRequest){
         restaurantHandler.saveRestaurant(restaurantRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+//        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return new ResponseEntity("Created",HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get restaurant")

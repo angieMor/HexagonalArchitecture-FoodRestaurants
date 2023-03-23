@@ -41,8 +41,8 @@ public class SavePlateHandlerDataTest {
         plateRequest.setIdCategory(1L);
         plateRequest.setDescription("Have nachos, sour cream, guacamole and pico de gallo");
         plateRequest.setPrice(15L);
-        plateRequest.setIdRestaurant(100L);
-        plateRequest.setUrlImage("www.hamburger.com/asdas.png");
+        plateRequest.setIdRestaurant(7L);
+        plateRequest.setUrlImage("https://www.hamburger.com/asdas.png");
 
         return plateRequest;
     }
@@ -50,10 +50,10 @@ public class SavePlateHandlerDataTest {
     public static PlateUpdatingRequest obtainPlateUpdatingRequest(){
         PlateUpdatingRequest plateUpdatingRequest = new PlateUpdatingRequest();
 
-        plateUpdatingRequest.setId(100L);
-        plateUpdatingRequest.setDescription("Pizza with loots of cheese");
-        plateUpdatingRequest.setPrice(15L);
-        plateUpdatingRequest.setIdOwner(2L);
+        plateUpdatingRequest.setId(20L);
+        plateUpdatingRequest.setDescription("Hamburger with loots of cheese");
+        plateUpdatingRequest.setPrice(30L);
+        plateUpdatingRequest.setIdOwner(52L);
 
         return plateUpdatingRequest;
 
@@ -62,8 +62,8 @@ public class SavePlateHandlerDataTest {
     public static PlateIsActiveRequest obtainPlateIsActiveRequest(){
         PlateIsActiveRequest plateIsActiveRequest = new PlateIsActiveRequest();
 
-        plateIsActiveRequest.setActive(true);
-        plateIsActiveRequest.setId(1L);
+        plateIsActiveRequest.setActive(false);
+        plateIsActiveRequest.setId(20L);
 
         return plateIsActiveRequest;
     }

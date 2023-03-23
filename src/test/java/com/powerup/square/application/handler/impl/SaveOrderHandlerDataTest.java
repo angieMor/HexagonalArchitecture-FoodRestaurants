@@ -77,7 +77,7 @@ public class SaveOrderHandlerDataTest {
     public static OrderGeneralRequest ObtainOrderGeneralRequest(){
        OrderGeneralRequest orderGeneralRequest = new OrderGeneralRequest();
 
-       orderGeneralRequest.setIdClient(44L);
+       orderGeneralRequest.setIdClient(51L);
 
        List<Long> idPlates = new ArrayList<>();
        idPlates.add(1L);
@@ -98,7 +98,7 @@ public class SaveOrderHandlerDataTest {
         OrdersStateRequest ordersStateRequest = new OrdersStateRequest();
 
         ordersStateRequest.setState("Pending");
-        ordersStateRequest.setIdEmployee(44L);
+        ordersStateRequest.setIdEmployee(54L);
 
         return ordersStateRequest;
     }
@@ -107,9 +107,9 @@ public class SaveOrderHandlerDataTest {
         OrderUpdateRequest orderUpdateRequest = new OrderUpdateRequest();
 
         List<Long> idOrders = new ArrayList<>();
-        idOrders.add(1L);
+        idOrders.add(15L);
 
-        orderUpdateRequest.setIdEmployee(44L);
+        orderUpdateRequest.setIdEmployee(50L);
         orderUpdateRequest.setIdOrders(idOrders);
 
         return orderUpdateRequest;
@@ -118,8 +118,8 @@ public class SaveOrderHandlerDataTest {
     public static OrderIsReadyRequest obtainOrderIsReady(){
         OrderIsReadyRequest orderIsReadyRequest = new OrderIsReadyRequest();
 
-        orderIsReadyRequest.setIdClient(45L);
-        orderIsReadyRequest.setPin(1020.0);
+        orderIsReadyRequest.setIdClient(51L);
+        orderIsReadyRequest.setPin(5020.0);
 
         return orderIsReadyRequest;
     }
@@ -127,7 +127,7 @@ public class SaveOrderHandlerDataTest {
     public static OrderDeveliveredRequest obtainOrderDeliveredRequest(){
         OrderDeveliveredRequest orderDeveliveredRequest = new OrderDeveliveredRequest();
 
-        orderDeveliveredRequest.setIdClient(5L);
+        orderDeveliveredRequest.setIdClient(51L);
         orderDeveliveredRequest.setPin(2020.0);
 
         return orderDeveliveredRequest;
@@ -138,7 +138,7 @@ public class SaveOrderHandlerDataTest {
         UsersPin usersPin = new UsersPin();
 
         usersPin.setIdClient(5L);
-        usersPin.setPin(2020L);
+        usersPin.setPin(5335L);
 
         return usersPin;
 
@@ -147,7 +147,7 @@ public class SaveOrderHandlerDataTest {
     public static OrderToBeCanceledRequest obtainOrderToBeCanceledRequest(){
         OrderToBeCanceledRequest orderToBeCanceledRequest = new OrderToBeCanceledRequest();
 
-        orderToBeCanceledRequest.setIdClient(5L);
+        orderToBeCanceledRequest.setIdClient(60L);
 
         return orderToBeCanceledRequest;
     }
