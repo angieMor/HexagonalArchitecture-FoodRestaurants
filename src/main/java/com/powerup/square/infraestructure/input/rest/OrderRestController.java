@@ -25,7 +25,8 @@ public class OrderRestController {
     @Operation(summary = "Add a new order")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Order created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/createOrder")
     public ResponseEntity<Void> saveOrderEntity(@Validated @RequestBody OrderGeneralRequest orderGeneralRequest){
@@ -36,7 +37,8 @@ public class OrderRestController {
     @Operation(summary = "Filter orders by state")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Orders filtered by state", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/ordersByState")
     public ResponseEntity<List<OrderGeneralResponse>> getOrdersByState(
@@ -49,8 +51,9 @@ public class OrderRestController {
 
     @Operation(summary = "Assign yourself some orders")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = @Content),
-            @ApiResponse(responseCode = "400", description = "", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Employee have been assigned", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/asignOrder")
     public ResponseEntity<Void> assignOrderEntity(@Validated @RequestBody OrderUpdateRequest orderUpdateRequest){
@@ -60,8 +63,9 @@ public class OrderRestController {
 
     @Operation(summary = "Notifies to the client that the order is ready via SMS")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = @Content),
-            @ApiResponse(responseCode = "400", description = "", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Client notified", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/notifyOrderIsReady")
     public ResponseEntity<Void>  notifyOrderIsReadyEntity(@Validated @RequestBody OrderIsReadyRequest orderIsReadyRequest){
@@ -72,7 +76,8 @@ public class OrderRestController {
     @Operation(summary = "Indicate that the order of a client was Delivered")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Client got his order", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/setOrderToDelivered")
     public ResponseEntity<Void>  orderWasDeliveredEntity(@Validated @RequestBody OrderDeveliveredRequest orderDeliveredRequest){
@@ -82,8 +87,9 @@ public class OrderRestController {
 
     @Operation(summary = "Indicate that the order of a client was Delivered")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Client got his order", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Client canceled his/her order", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/cancelOrder")
     public ResponseEntity<Void>  orderToBeCanceledEntity(@Validated @RequestBody OrderToBeCanceledRequest orderToBeCanceledRequest){

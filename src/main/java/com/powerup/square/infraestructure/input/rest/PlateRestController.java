@@ -30,7 +30,8 @@ public class PlateRestController {
     @Operation(summary = "Add a new plate")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Plate created", content = @Content),
-            @ApiResponse(responseCode = "400", description = "Plate already exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/createPlate")
     public ResponseEntity<Void> savePlateEntity(@Validated @RequestBody PlateRequest plateRequest,
@@ -54,7 +55,8 @@ public class PlateRestController {
     @Operation(summary = "Get plates by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Plate gotten", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @GetMapping("/getPlate/{id}")
     public PlateResponse getAllPlateById(@PathVariable Long id){
@@ -64,7 +66,9 @@ public class PlateRestController {
 
     @Operation(summary = "change plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Plate updated successfully", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate updated successfully", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/putPlate")
     public ResponseEntity<Void> editPlate(@Validated @RequestBody PlateUpdatingRequest plateUpdatingRequest,
@@ -89,7 +93,9 @@ public class PlateRestController {
 
     @Operation(summary = "change plate")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Plate state updated successfully", content = @Content)
+            @ApiResponse(responseCode = "200", description = "Plate state updated successfully", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PutMapping("/putActivate")
     public ResponseEntity<Void> editPlateStatus(@Validated @RequestBody PlateIsActiveRequest plateIsActiveRequest,
@@ -115,7 +121,8 @@ public class PlateRestController {
     @Operation(summary = "Get plates by restaurant")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Plate gotten", content = @Content),
-            @ApiResponse(responseCode = "409", description = "Plate doesn't exists", content = @Content)
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/allPlates")
     public ResponseEntity<List<PlateResponse>> getPlatesFromRestaurant(@Validated @RequestBody PlateListRequest plateListRequest){

@@ -36,7 +36,7 @@ public class UserRestController {
     @Operation(summary = "User authentication")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User logged", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/authenticate")
@@ -47,8 +47,7 @@ public class UserRestController {
     @Operation(summary = "Add a new proprietary")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/proprietary")
@@ -61,8 +60,7 @@ public class UserRestController {
     @Operation(summary = "Add a new Employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
-            @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
     @PostMapping("/employee")
@@ -95,7 +93,6 @@ public class UserRestController {
     @Operation(summary = "Add a new Client")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "User created", content = @Content),
-            @ApiResponse(responseCode = "409", description = "User already exists", content = @Content),
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content)
     })
     @PostMapping("/client")
@@ -105,8 +102,7 @@ public class UserRestController {
 
     @Operation(summary = "get User by email")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "302", description = "User found", content = @Content),
-            @ApiResponse(responseCode = "404", description = "User don't exists", content = @Content),
+            @ApiResponse(responseCode = "200", description = "User found", content = @Content),
             @ApiResponse(responseCode = "400", description = "bad request", content = @Content),
             @ApiResponse(responseCode = "403", description = "No authorized", content = @Content)
     })
